@@ -8,13 +8,13 @@
     "css": "src/shared/styles/globals.css",
     "baseColor": "neutral",
     "cssVariables": true,
-    "prefix": ""
+    "prefix": "",
   },
   "aliases": {
     "components": "~/shared/ui",
     "utils": "~/shared/lib/utils",
     "ui": "~/shared/ui/components",
     "lib": "~/shared/lib",
-    "hooks": "~/shared/lib/hooks"
-  }
+    "hooks": "~/shared/lib/hooks",
+  },
 }

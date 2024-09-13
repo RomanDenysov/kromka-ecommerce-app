@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "types": ["react", "react-dom", "node"],
     "allowJs": true,
+    "strictNullChecks": true,
+    "noUncheckedIndexedAccess": true,
     "skipLibCheck": true,
+    "noImplicitAny": true,
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -17,31 +17,25 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "forceConsistentCasingInFileNames": true,
     "plugins": [
       {
-        "name": "next"
-      }
+        "name": "next",
+      },
     ],
     "paths": {
-      "~/*": [
-        "./src/*"
-      ],
-      "~/app/*": [
-        "./src/app/(app)/*"
-      ],
-      "@payload-config": [
-        "./src/payload/payload.config.ts"
-      ]
+      "~/*": ["./src/*"],
+      "~/app/*": ["./src/app/(app)/*"],
+      "@payload-config": ["./src/payload/payload.config.ts"],
     },
-    "target": "ES2022"
+    "target": "ES2022",
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
-, "tailwind.config.mjs"  ],
-  "exclude": [
-    "node_modules"
-  ]
+    ".next/types/**/*.ts",
+    "tailwind.config.mjs",
+  ],
+  "exclude": ["node_modules"],
 }

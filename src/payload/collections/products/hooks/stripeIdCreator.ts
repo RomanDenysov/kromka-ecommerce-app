@@ -19,7 +19,7 @@
 //     }
 
 //     return updated
-//   } else if (operation === 'update') { 
+//   } else if (operation === 'update') {
 //     const updatedProduct = await stripe.products.update(data.stripeId!, {
 //             name: data.name,
 //             default_price: data.priceId!,

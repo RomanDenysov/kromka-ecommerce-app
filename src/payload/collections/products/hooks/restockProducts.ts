@@ -46,7 +46,7 @@
 //           collection: COLLECTION_SLUG.PRODUCTS,
 //           id: product.id,
 //           data: {
-//             storeInventory, 
+//             storeInventory,
 //             lastRestockDate: today,
 //            },
 //         });

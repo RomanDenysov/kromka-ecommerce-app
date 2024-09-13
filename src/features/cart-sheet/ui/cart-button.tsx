@@ -1,19 +1,33 @@
 'use client'
 
-import { ShoppingCartIcon } from 'lucide-react'
-import React from 'react'
-import { Badge } from '~/shared/ui/components/badge'
-import { Button } from '~/shared/ui/components/button'
+import {ShoppingCartIcon} from 'lucide-react'
+import {Badge} from '~/shared/ui/components/badge'
+import {Button} from '~/shared/ui/components/button'
+import {useCart} from '../../cart-page-view/hooks/use-cart'
+import {useCartSheet} from '../hooks/use-cart-sheet'
 
 const CartButton = () => {
-  return (
-    <Button variant={'ghost'} size={'icon'} className='size-10 rounded-full grid place-items-center relative'>
-      <ShoppingCartIcon size={24} />
-      <Badge className='absolute px-1 py-0 top-0 right-0'>
-        1
-      </Badge>
-    </Button>
-  )
+	const onOpen = useCartSheet((state) => state.onOpen)
+	const items = useCart((state) => state.items)
+	const totalQuantity: number = items.reduce(
+		(total, item) => total + item.quantity,
+		0,
+	)
+
+	return (
+		<Button
+			onClick={onOpen}
+			variant={'ghost'}
+			size={'icon'}
+			className='relative grid size-10 place-items-center rounded-full'>
+			<ShoppingCartIcon size={24} />
+			{totalQuantity >= 1 && (
+				<Badge className='absolute top-0 right-0 px-1 py-0'>
+					{totalQuantity}
+				</Badge>
+			)}
+		</Button>
+	)
 }
 
 export default CartButton
