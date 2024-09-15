@@ -14,7 +14,6 @@ export default async function Header() {
 		<header className='sticky inset-x-0 top-0 z-50 bg-background'>
 			<Container className='flex h-16 items-center justify-between border-border border-b'>
 				<Link href='/'>
-					h-16 borderb
 					<Icons.logo className='size-10 fill-accent-foreground' />
 				</Link>
 
@@ -23,9 +22,9 @@ export default async function Header() {
 				</div>
 
 				<div className='flex items-center gap-x-2'>
-					<span className='h-8 w-[2px] bg-border' />
+					<span className='h-6 w-[2px] bg-border' />
 					<UserButton />
-					<span className='h-8 w-[2px] bg-border' />
+					<span className='h-6 w-[2px] bg-border' />
 					<CartButton />
 				</div>
 			</Container>

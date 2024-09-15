@@ -16,7 +16,7 @@ export const CartItemsList = React.memo(() => {
 					Váš košík je prázdny
 				</Typography>
 			) : (
-				<ul>
+				<ul className='space-y-2'>
 					{items.map(({product, quantity}) => (
 						<CartItem
 							key={`product-${product.id}`}

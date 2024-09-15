@@ -4,17 +4,17 @@
   "rsc": true,
   "tsx": true,
   "tailwind": {
-    "config": "tailwind.config.ts",
-    "css": "src/shared/styles/globals.css",
-    "baseColor": "neutral",
-    "cssVariables": true,
-    "prefix": "",
-  },
+			"config": "tailwind.config.ts",
+			"css": "src/shared/styles/globals.css",
+			"baseColor": "neutral",
+			"cssVariables": true,
+			"prefix": ""
+		},
   "aliases": {
-    "components": "~/shared/ui",
-    "utils": "~/shared/lib/utils",
-    "ui": "~/shared/ui/components",
-    "lib": "~/shared/lib",
-    "hooks": "~/shared/lib/hooks",
-  },
+			"components": "~/shared/ui",
+			"utils": "~/shared/lib/utils",
+			"ui": "~/shared/ui/components",
+			"lib": "~/shared/lib",
+			"hooks": "~/shared/lib/hooks"
+		}
 }

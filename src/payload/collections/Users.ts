@@ -5,6 +5,8 @@ export const Users: CollectionConfig = {
 	slug: 'users',
 	admin: {
 		useAsTitle: 'email',
+		defaultColumns: ['email', 'role', 'createdAt'],
+		listSearchableFields: ['email', 'phone'],
 	},
 	auth: true,
 	fields: [
@@ -29,56 +31,63 @@ export const Users: CollectionConfig = {
 			},
 		},
 		{
-			name: 'address',
-			type: 'relationship',
-			relationTo: COLLECTION_SLUG.ADDRESSES,
-			label: 'Address',
-			admin: {
-				position: 'sidebar',
-				description: 'Address of the user',
-			},
-		},
-		{
-			name: 'preferedStore',
-			type: 'relationship',
-			relationTo: COLLECTION_SLUG.STORES,
-			label: 'Prefered Store',
-			admin: {
-				position: 'sidebar',
-				description: 'Prefered store of the user',
-			},
-		},
-		{
-			name: 'preferedPaymentMethod',
-			type: 'select',
-			label: 'Prefered Payment Method',
-			options: [
+			name: 'addresses',
+			type: 'array',
+			label: 'Addresses',
+			fields: [
 				{
-					label: 'Pickup in store',
-					value: 'inStore',
-				},
-				{
-					label: 'Card',
-					value: 'card',
-				},
-				{
-					label: 'Stripe',
-					value: 'stripe',
+					name: 'address',
+					type: 'relationship',
+					relationTo: COLLECTION_SLUG.ADDRESSES,
+					required: true,
 				},
 			],
 			admin: {
 				position: 'sidebar',
-				description: 'Prefered payment method of the user',
+			},
+		},
+		{
+			name: 'preferences',
+			type: 'group',
+			label: 'User Preferences',
+			fields: [
+				{
+					name: 'preferedStore',
+					type: 'relationship',
+					relationTo: COLLECTION_SLUG.STORES,
+					label: 'Preferred Store',
+					admin: {
+						description: 'Preferred store of the user',
+					},
+				},
+				{
+					name: 'preferedPaymentMethod',
+					type: 'select',
+					label: 'Preferred Payment Method',
+					options: [
+						{label: 'Pickup in store', value: 'inStore'},
+						{label: 'Card', value: 'card'},
+						{label: 'Stripe', value: 'stripe'},
+					],
+					admin: {
+						description: 'Preferred payment method of the user',
+					},
+				},
+			],
+			admin: {
+				position: 'sidebar',
 			},
 		},
 		{
 			name: 'acceptedTerms',
 			type: 'checkbox',
 			label: 'Accepted Terms',
+			required: true,
 			admin: {
 				position: 'sidebar',
 				description: 'Accepted terms of the user',
 			},
+			defaultValue: false,
 		},
 		{
 			name: 'acceptedMailNotifications',
@@ -88,6 +97,8 @@ export const Users: CollectionConfig = {
 				position: 'sidebar',
 				description: 'Accepted mail notifications of the user',
 			},
+			defaultValue: false,
 		},
 	],
+	timestamps: true,
 }

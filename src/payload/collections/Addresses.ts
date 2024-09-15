@@ -43,27 +43,12 @@ export const Addresses: CollectionConfig = {
 			type: 'text',
 			label: 'Country',
 			required: true,
+			defaultValue: 'Slovakia',
 		},
 		{
 			name: 'googleMapsUrl',
 			type: 'text',
 			label: 'Google Maps URL',
-		},
-		{
-			name: 'latitude',
-			type: 'number',
-			label: 'Latitude',
-			admin: {
-				step: 0.000001,
-			},
-		},
-		{
-			name: 'longitude',
-			type: 'number',
-			label: 'Longitude',
-			admin: {
-				step: 0.000001,
-			},
 		},
 	],
 }

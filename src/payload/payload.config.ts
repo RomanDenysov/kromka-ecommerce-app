@@ -13,6 +13,7 @@ import authConfig from '~/shared/lib/auth/auth.config'
 import {
 	Addresses,
 	Categories,
+	Inventory,
 	Media,
 	Orders,
 	Products,
@@ -41,6 +42,7 @@ export default buildConfig({
 		Categories,
 		Products,
 		Orders,
+		Inventory,
 	],
 	globals: [AppOptions],
 	cors: ['https://checkout.stripe.com', env.NEXT_PUBLIC_SERVER_URL],

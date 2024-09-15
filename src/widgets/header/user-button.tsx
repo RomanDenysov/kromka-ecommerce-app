@@ -59,7 +59,6 @@ const LOGOUT_BTN = {
 
 const UserButton = () => {
 	const {data: user, isLoading} = useUserQuery()
-
 	// TODO: check if user is admin
 	const isAdmin = user?.role === 'admin'
 
@@ -71,8 +70,8 @@ const UserButton = () => {
 						disabled={isLoading}
 						variant={'ghost'}
 						size={'icon'}
-						className='relative grid size-10 select-none place-items-center rounded-full focus:outline-none focus:ring-0 focus-visible:ring-0'>
-						<Avatar>
+						className='relative grid size-9 select-none place-items-center rounded-full focus:outline-none focus:ring-0 focus-visible:ring-0'>
+						<Avatar className='size-9'>
 							<AvatarImage src={user.image || undefined} />
 							<AvatarFallback>{user.name ?? '?'}</AvatarFallback>
 						</Avatar>
@@ -91,7 +90,7 @@ const UserButton = () => {
 						}
 						className={cn(
 							buttonVariants({variant: 'ghost', size: 'icon'}),
-							'relative grid size-10 place-items-center rounded-full',
+							'relative grid size-9 place-items-center rounded-full',
 						)}>
 						<LogInIcon size={24} />
 					</Link>

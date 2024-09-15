@@ -15,19 +15,8 @@ export const Tags: CollectionConfig = {
 			name: 'name',
 			type: 'text',
 			label: 'Tag Name',
+			unique: true,
 			required: true,
-		},
-		{
-			name: 'rating',
-			type: 'number',
-			label: 'Rating (optional)',
-			min: 0,
-			max: 10,
-		},
-		{
-			name: 'description',
-			type: 'textarea',
-			label: 'Description (optional)',
 		},
 	],
 }

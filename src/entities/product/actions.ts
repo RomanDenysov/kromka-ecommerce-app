@@ -19,31 +19,21 @@ export async function getInfiniteProducts(params: InfiniteProductsQueryInput) {
 			throw new InActionsError('PRODUCT', 'Invalid query params (infinite)')
 		}
 		const {query, cursor, excludeProductId} = validationResult.data
-
 		const {sort, limit, ...queryOpts} = query
-
 		const page = cursor || 1
 
 		const payload = await getPayload()
 		if (!payload) throw new PayloadError('Payload not configured (infinite)')
 
-		const parsedQueryOpts: Record<string, {equals: string}> = {}
+		const parsedQueryOpts: Record<string, {equals: string | number}> = {}
 
 		for (const [key, value] of Object.entries(queryOpts)) {
-			if (typeof value === 'string') {
-				parsedQueryOpts[key] = {
-					equals: value,
-				}
-			} else if (typeof value === 'number') {
-				parsedQueryOpts[key] = {
-					equals: String(value),
-				}
+			parsedQueryOpts[key] = {
+				equals: value,
 			}
 		}
-
 		// TODO: Add support for multiple filters
 		// const parsedQuery = Object.keys(parsedQueryOpts).length > 0 ? { AND: parsedQueryOpts } : {}
-
 		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 		const conditions: Record<string, any> = {
 			status: {
@@ -51,12 +41,13 @@ export async function getInfiniteProducts(params: InfiniteProductsQueryInput) {
 			},
 			...parsedQueryOpts,
 		}
-
+    
 		if (excludeProductId) {
 			conditions.id = {
 				not_equals: excludeProductId,
 			}
 		}
+    
 		const {
 			docs: items,
 			hasNextPage,

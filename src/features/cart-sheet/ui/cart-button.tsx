@@ -19,10 +19,10 @@ const CartButton = () => {
 			onClick={onOpen}
 			variant={'ghost'}
 			size={'icon'}
-			className='relative grid size-10 place-items-center rounded-full'>
+			className='relative grid size-9 place-items-center rounded-full'>
 			<ShoppingCartIcon size={24} />
 			{totalQuantity >= 1 && (
-				<Badge className='absolute top-0 right-0 px-1 py-0'>
+				<Badge className='absolute top-0 right-0 px-0.5 py-0'>
 					{totalQuantity}
 				</Badge>
 			)}

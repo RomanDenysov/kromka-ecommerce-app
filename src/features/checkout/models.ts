@@ -17,6 +17,7 @@ export type UserInfoFormData = z.infer<typeof userInfoSchema>
 
 export const checkoutSchema = z
 	.object({
+		user: userInfoSchema,
 		paymentMethod: z.enum(['inStore', 'card', 'stripe']),
 		deliveryMethod: z.enum(['pickup', 'delivery']),
 		deliveryAddress: z

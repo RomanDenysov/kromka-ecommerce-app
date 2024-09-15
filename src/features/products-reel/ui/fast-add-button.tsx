@@ -39,7 +39,7 @@ export const FastAddButton = ({product}: Props) => {
 
 	if (currentQuantity > 0) {
 		return (
-			<div className='z-50 flex h-[28px] w-[76px] items-center justify-between rounded-md border border-border bg-background shadow-sm '>
+			<div className='z-30 flex h-[28px] w-[76px] items-center justify-between rounded-md border border-border bg-background shadow-sm '>
 				<button
 					type='button'
 					onClick={(e) => handleRemoveItem(e)}
@@ -72,7 +72,7 @@ export const FastAddButton = ({product}: Props) => {
 	}
 
 	return (
-		<div className='z-50'>
+		<div className='z-30'>
 			<Button
 				variant={'outline'}
 				onClick={(e) => handleAddItem(e)}

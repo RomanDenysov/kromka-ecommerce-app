@@ -47,7 +47,6 @@ export const DatePicker = ({onDateSelect}: Props) => {
 						'w-full justify-start text-left font-normal',
 						!date && 'text-muted-foreground',
 					)}>
-					// disabled={!isBeforeNoon}
 					<CalendarIcon className='mr-2 h-4 w-4' />
 					{date ? format(date, 'PP') : <span>Zvoľte si dátum pre odber</span>}
 				</Button>
@@ -56,6 +55,7 @@ export const DatePicker = ({onDateSelect}: Props) => {
 				<Calendar
 					mode='single'
 					weekStartsOn={1}
+					lang='sk'
 					selected={date}
 					onSelect={handleSelectDate}
 					required={true}

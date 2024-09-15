@@ -8,5 +8,6 @@ export const COLLECTION_SLUG = {
 	CATEGORIES: 'categories',
 	ORDERS: 'orders',
 	POSTS: 'posts',
+	INVENTORY: 'inventory',
 	APP_OPTIONS: 'appOptions',
 } as const

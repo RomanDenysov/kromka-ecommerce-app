@@ -15,6 +15,17 @@ export const Categories: CollectionConfig = {
 		update: isAdmin,
 		delete: () => false,
 	},
+	hooks: {
+		beforeValidate: [
+			({data}) => {
+				if (data) {
+					if (data.parent === data.id) {
+						throw new Error('Category cannot be its own parent')
+					}
+				}
+			},
+		],
+	},
 	fields: [
 		{
 			name: 'name',

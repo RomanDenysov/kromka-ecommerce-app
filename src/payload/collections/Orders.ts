@@ -1,13 +1,6 @@
-import type {CollectionConfig, PayloadRequest} from 'payload'
+import type {CollectionConfig} from 'payload'
 import {isAdmin, isAdminOrCreatedBy} from '~/payload/access'
 import {COLLECTION_SLUG} from '~/payload/config'
-import type {Order} from '~/payload/payload-types'
-
-interface OrderProduct {
-	product: string // assuming product ID is a string
-	quantity: number
-	price: number
-}
 
 export const Orders: CollectionConfig = {
 	slug: COLLECTION_SLUG.ORDERS,
@@ -23,16 +16,29 @@ export const Orders: CollectionConfig = {
 	},
 	hooks: {
 		beforeChange: [
-			async ({
-				req,
-				operation,
-				data,
-			}: {req: PayloadRequest; operation: string; data: Partial<Order>}) => {
-				if (operation === 'create') {
+			async ({req, operation, data}) => {
+				if (operation === 'create' && data) {
 					if (req.user) {
 						data.createdBy = req.user.id
 					}
 					return data
+				}
+			},
+		],
+		beforeValidate: [
+			async ({data, operation}) => {
+				if ((operation === 'create' || operation === 'update') && data) {
+					const isAuthenticatedOrder = Boolean(data.createdBy)
+					const hasGuestInfo =
+						data.guestInfo?.name &&
+						data.guestInfo?.email &&
+						data.guestInfo?.phone
+
+					if (!isAuthenticatedOrder && !hasGuestInfo) {
+						throw new Error(
+							'Either a registered user must be associated with the order, or guest information must be provided.',
+						)
+					}
 				}
 			},
 		],
@@ -43,7 +49,6 @@ export const Orders: CollectionConfig = {
 			type: 'relationship',
 			relationTo: COLLECTION_SLUG.USERS,
 			label: 'Customer',
-			required: true,
 			hasMany: false,
 			access: {
 				update: () => false,
@@ -51,8 +56,36 @@ export const Orders: CollectionConfig = {
 			admin: {
 				position: 'sidebar',
 				readOnly: true,
-				condition: (data) => Boolean(data?.createdBy),
+				condition: (data) => Boolean(data.createdBy),
 			},
+		},
+		{
+			name: 'guestInfo',
+			type: 'group',
+			label: 'Guest Customer Information',
+			admin: {
+				condition: (data) => data.createdBy,
+			},
+			fields: [
+				{
+					name: 'name',
+					type: 'text',
+					label: 'Name',
+					required: true,
+				},
+				{
+					name: 'email',
+					type: 'email',
+					label: 'Email',
+					required: true,
+				},
+				{
+					name: 'phone',
+					type: 'text',
+					label: 'Phone',
+					required: true,
+				},
+			],
 		},
 		{
 			name: 'status',
@@ -71,10 +104,6 @@ export const Orders: CollectionConfig = {
 				{
 					label: 'Ready for pickup/delivery',
 					value: 'ready',
-				},
-				{
-					label: 'Shipped',
-					value: 'shipped',
 				},
 				{
 					label: 'Completed',
@@ -100,15 +129,15 @@ export const Orders: CollectionConfig = {
 			options: [
 				{
 					label: 'Pickup in store (cash or card)',
-					value: 'cash',
+					value: 'inStore',
 				},
 				{
 					label: 'Card',
 					value: 'card',
 				},
 				{
-					label: 'Stripe (optional now)',
-					value: 'stripe',
+					label: 'B2B (optional now)',
+					value: 'b2b',
 				},
 				{
 					label: 'Other',
@@ -211,32 +240,6 @@ export const Orders: CollectionConfig = {
 			},
 		},
 		{
-			name: 'deliveryMethod',
-			type: 'select',
-			label: 'Delivery Method',
-			required: true,
-			options: [
-				{
-					label: 'Delivery',
-					value: 'delivery',
-				},
-				{
-					label: 'Pickup',
-					value: 'pickup',
-				},
-				{
-					label: 'Other',
-					value: 'other',
-				},
-			],
-			admin: {
-				position: 'sidebar',
-				description:
-					"Delivery - the order will be delivered to the customer's address. Pickup - the order will be picked up from the customer's address. Other - the order will be delivered to the customer's address and picked up from the customer's address.",
-			},
-			defaultValue: 'pickup',
-		},
-		{
 			name: 'pickupStore',
 			type: 'relationship',
 			relationTo: COLLECTION_SLUG.STORES,
@@ -250,16 +253,13 @@ export const Orders: CollectionConfig = {
 			},
 		},
 		{
-			name: 'deliveryAddress',
-			type: 'relationship',
-			relationTo: COLLECTION_SLUG.ADDRESSES,
-			label: 'Delivery Address',
-			required: true,
-			hasMany: false,
+			name: 'pickupDate',
+			type: 'date',
+			label: 'Pickup Date',
 			admin: {
 				position: 'sidebar',
-				description: 'Delivery address of the order',
-				condition: (data) => data.deliveryMethod === 'delivery',
+				description: 'Pickup date for the order',
+				condition: (data) => data.deliveryMethod === 'pickup',
 			},
 		},
 		{

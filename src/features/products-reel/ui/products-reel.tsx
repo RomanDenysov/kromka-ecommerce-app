@@ -36,7 +36,7 @@ const ProductsReel = ({
 	const {products, isLoading} = useInfiniteProductQuery({
 		limit,
 		query,
-		cursor: 0,
+		cursor: 1,
 		excludeProductId,
 	})
 

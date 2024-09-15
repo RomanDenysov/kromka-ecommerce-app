@@ -1,10 +1,12 @@
-import {ImageIcon, MinusIcon, PlusIcon, X} from 'lucide-react'
+import {ImageIcon, X} from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import type {Product} from '~/payload/payload-types'
+import {useConfirm} from '~/shared/hooks/use-confirm'
 import {formatPrice} from '~/shared/lib/utils'
 import {Typography} from '~/shared/ui/components/typography'
 import {useCart} from '../hooks/use-cart'
+import {ItemQuantityButton} from './item-quantity-button'
 
 type Props = {
 	product: Product
@@ -12,22 +14,20 @@ type Props = {
 }
 
 export const CartItem = ({product, quantity}: Props) => {
+	const [ConfirmDialog, confirm] = useConfirm(
+		'Zmazat položku',
+		'Opravdu chcete smazat tuto položku z košíku?',
+	)
 	const removeItem = useCart((state) => state.removeItem)
-	const addItem = useCart((state) => state.addItem)
 
-	const handleRemoveItem = () => removeItem(product.id)
-	const increaseItemQuantity = () => addItem({product, quantity: +1})
-	const decreaseItemQuantity = () => {
-		if (quantity > 1) {
-			addItem({product, quantity: -1})
-		} else {
-			handleRemoveItem()
+	const handleRemoveItem = async () => {
+		const ok = await confirm()
+		if (ok) {
+			removeItem(product.id)
 		}
 	}
 
 	if (!product) return null
-
-	const price = formatPrice(product.price * quantity)
 
 	const {image} = product.images[0] ?? {image: null}
 
@@ -54,68 +54,47 @@ export const CartItem = ({product, quantity}: Props) => {
 	}
 
 	return (
-		<li className='flex border-t py-2 sm:py-4'>
-			<div className='flex-shrink-0'>
-				<div className='relative size-36 shadow-md sm:size-48'>
-					<Link href={`/products/${product.slug}`}>{renderImage()}</Link>
+		<>
+			<ConfirmDialog />
+			<li className='flex border-t py-2 sm:py-4'>
+				<div className='flex-shrink-0'>
+					<div className='relative size-36 shadow-md sm:size-48'>
+						<Link href={`/products/${product.slug}`}>{renderImage()}</Link>
+					</div>
 				</div>
-			</div>
 
-			<div className='ml-4 flex h-36 w-full flex-col justify-between sm:ml-6 sm:h-48'>
-				<div className='relative grid size-full content-between pr-9 sm:grid-cols-2 sm:gap-x-6 sm:pr-0'>
-					<div className=''>
-						<Typography variant='h6' className='mb-2'>
-							{product.name}
-						</Typography>
-
-						<Typography variant='h5' className='mb-2 text-muted-foreground'>
-							{formatPrice(product.price)}
-						</Typography>
-
-						{/* TODO: Add current inventory status */}
-					</div>
-
-					<div className='absolute top-0 right-0 flex'>
-						<button
-							type='button'
-							// TODO: Add remove from cart confirmation later by useConfirm hook
-							onClick={() => removeItem(product.id)}
-							className='rounded-md hover:bg-accent focus:outline-none focus:ring-1 focus:ring-ring focus:ring-offset-1 focus:ring-offset-white'>
-							<X className='size-6 flex-shrink-0' />
-						</button>
-					</div>
-
-					<div className='col-span-2 mb-0,5 flex items-center justify-between gap-x-2'>
-						<div className='flex items-center justify-between gap-x-4'>
-							<button
-								type='button'
-								onClick={decreaseItemQuantity}
-								className='rounded-md hover:bg-accent focus:outline-none focus:ring-1 focus:ring-ring focus:ring-offset-1 focus:ring-offset-white'>
-								<MinusIcon className='size-6 flex-shrink-0' />
-							</button>
-
-							<Typography variant='span' className=''>
-								{quantity}
+				<div className='ml-4 flex h-36 w-full flex-col justify-between sm:ml-6 sm:h-48'>
+					<div className='relative grid size-full content-between pr-0.5 sm:grid-cols-2 sm:gap-x-6'>
+						<div className=''>
+							<Typography variant='h6' className='mb-1 line-clamp-2 sm:mb-2'>
+								{product.name}
 							</Typography>
 
-							<button
-								type='button'
-								onClick={increaseItemQuantity}
-								className='rounded-md hover:bg-accent focus:outline-none focus:ring-1 focus:ring-ring focus:ring-offset-1 focus:ring-offset-white'>
-								<PlusIcon className='size-6 flex-shrink-0' />
-							</button>
-						</div>
-
-						<div className='absolute right-0.5 bottom-0 flex items-start'>
 							<Typography
 								variant='h5'
-								className='text-muted-foreground sm:mr-2'>
-								{price}
+								className='mb-1 text-muted-foreground sm:mb-2'>
+								{formatPrice(product.price)}
 							</Typography>
+
+							{/* TODO: Add current inventory status */}
+						</div>
+
+						<div className='absolute top-0 right-0.5 flex'>
+							<button
+								type='button'
+								// TODO: Add remove from cart confirmation later by useConfirm hook
+								onClick={handleRemoveItem}
+								className='rounded-md hover:bg-accent focus:outline-none focus:ring-1 focus:ring-ring focus:ring-offset-1 focus:ring-offset-white'>
+								<X className='size-6 flex-shrink-0' />
+							</button>
+						</div>
+
+						<div className='col-span-2 mb-0,5'>
+							<ItemQuantityButton product={product} quantity={quantity} />
 						</div>
 					</div>
 				</div>
-			</div>
-		</li>
+			</li>
+		</>
 	)
 }
