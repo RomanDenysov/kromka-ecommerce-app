@@ -21,7 +21,7 @@ const GRID_NAV_ITEMS = [
 		title: 'Stan partnerom',
 		descr: 'Lorem ipsum dolor sit amet',
 		img: '/kromka_bunner_bg_b2b.webp',
-		href: '/b2b',
+		href: '/auth',
 	},
 ]
 
@@ -33,7 +33,7 @@ type Props = {
 
 const HeroGrid = React.memo(({className, items}: Props) => {
 	return (
-		<div
+		<section
 			className={cn(
 				'grid size-full content-stretch gap-6 md:grid-cols-3',
 				className,
@@ -50,7 +50,7 @@ const HeroGrid = React.memo(({className, items}: Props) => {
 					<HeroGridItem {...item} />
 				</Link>
 			))}
-		</div>
+		</section>
 	)
 })
 

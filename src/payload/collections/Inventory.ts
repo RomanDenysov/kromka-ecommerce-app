@@ -5,8 +5,8 @@ import {COLLECTION_SLUG} from '../config'
 export const Inventory: CollectionConfig = {
 	slug: COLLECTION_SLUG.INVENTORY,
 	admin: {
-		useAsTitle: 'name',
-		defaultColumns: ['name', 'store', 'quantity'],
+		useAsTitle: 'product',
+		defaultColumns: ['product', 'store', 'quantity'],
 	},
 	access: {
 		read: () => true,

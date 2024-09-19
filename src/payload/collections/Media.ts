@@ -12,7 +12,7 @@ export const Media: CollectionConfig = {
 		read: () => true,
 		create: isAdmin,
 		update: isAdmin,
-		delete: () => false,
+		delete: isAdmin,
 	},
 	fields: [
 		{
@@ -27,6 +27,32 @@ export const Media: CollectionConfig = {
 		},
 	],
 	upload: {
+		imageSizes: [
+			{
+				name: 'sm',
+				width: 320,
+				height: 240,
+				position: 'centre',
+			},
+			{
+				name: 'thumbnail',
+				width: 480,
+				height: 320,
+				position: 'centre',
+			},
+			{
+				name: 'md',
+				width: 640,
+				height: 480,
+				position: 'centre',
+			},
+			{
+				name: 'lg',
+				width: 1024,
+				height: undefined,
+				position: 'centre',
+			},
+		],
 		staticDir: path.resolve(dirname, '../../../public/media'),
 		mimeTypes: [
 			'image/jpeg',

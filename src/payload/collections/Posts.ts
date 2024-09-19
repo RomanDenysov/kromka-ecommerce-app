@@ -7,13 +7,7 @@ export const Posts: CollectionConfig = {
 	slug: COLLECTION_SLUG.POSTS,
 	admin: {
 		useAsTitle: 'title',
-		defaultColumns: [
-			'title',
-			'author',
-			'status',
-			'publishedDate',
-			'categories',
-		],
+		defaultColumns: ['title', 'status', 'publishedDate', 'categories'],
 	},
 	access: {
 		read: () => true,

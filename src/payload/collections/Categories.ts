@@ -15,17 +15,6 @@ export const Categories: CollectionConfig = {
 		update: isAdmin,
 		delete: () => false,
 	},
-	hooks: {
-		beforeValidate: [
-			({data}) => {
-				if (data) {
-					if (data.parent === data.id) {
-						throw new Error('Category cannot be its own parent')
-					}
-				}
-			},
-		],
-	},
 	fields: [
 		{
 			name: 'name',
@@ -36,7 +25,7 @@ export const Categories: CollectionConfig = {
 		},
 		slugField('name'),
 		{
-			name: 'parent',
+			name: 'parent', 
 			type: 'relationship',
 			relationTo: COLLECTION_SLUG.CATEGORIES,
 			label: 'Parent Category ',

@@ -80,18 +80,6 @@ export const Products: CollectionConfig = {
 			},
 		},
 		{
-			name: 'ingredients',
-			type: 'array',
-			label: 'Ingredients',
-			fields: [
-				{
-					name: 'ingredient',
-					type: 'text',
-					required: true,
-				},
-			],
-		},
-		{
 			name: 'price',
 			type: 'number',
 			label: 'Price (EUR)',

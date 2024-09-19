@@ -34,7 +34,7 @@ export function AuthForm<T extends z.ZodType>({
 
 	return (
 		<Form {...form}>
-			<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
+			<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-2'>
 				{fields.map((field) => (
 					<FormField
 						key={field.name}
@@ -62,15 +62,13 @@ export function AuthForm<T extends z.ZodType>({
 					/>
 				))}
 				{children}
-				<div className='pt-4'>
-					<LoaderButton
-						size={'lg'}
-						className='w-full font-medium'
-						type='submit'
-						isLoading={form.formState.isSubmitting}>
-						{submitButtonText}
-					</LoaderButton>
-				</div>
+				<LoaderButton
+					size={'lg'}
+					className='w-full font-medium'
+					type='submit'
+					isLoading={form.formState.isSubmitting}>
+					{submitButtonText}
+				</LoaderButton>
 			</form>
 		</Form>
 	)

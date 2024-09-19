@@ -11,7 +11,7 @@ import {
 import Link from 'next/link'
 import {useUserQuery} from '~/entities/user/hooks/use-user-query'
 import type {User} from '~/payload/payload-types'
-import {cn} from '~/shared/lib/utils'
+import {cn, getNameInitials} from '~/shared/lib/utils'
 import {
 	Avatar,
 	AvatarFallback,
@@ -73,7 +73,9 @@ const UserButton = () => {
 						className='relative grid size-9 select-none place-items-center rounded-full focus:outline-none focus:ring-0 focus-visible:ring-0'>
 						<Avatar className='size-9'>
 							<AvatarImage src={user.image || undefined} />
-							<AvatarFallback>{user.name ?? '?'}</AvatarFallback>
+							<AvatarFallback>
+								{getNameInitials(user.name ? user.name : '') ?? '?'}
+							</AvatarFallback>
 						</Avatar>
 					</Button>
 				) : (

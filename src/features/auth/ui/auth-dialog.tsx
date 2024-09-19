@@ -18,7 +18,7 @@ import {
 const AUTH_CONTENT = {
 	signIn: {
 		title: 'Prihlásiť sa',
-		description: 'Prihláste sa do svojho účtu',
+		description: 'Prihláste sa do svojho účtu alebo vytvorte si nový',
 		switchText: 'Vytvoriť účet',
 		questionText: 'Nemáte žiadne konto?',
 	},
@@ -34,11 +34,11 @@ export default function AuthDialog() {
 	const router = useRouter()
 	const searchParams = useSearchParams()
 	const authState = searchParams.get('authState') as AuthState | null
-	const [state, setState] = React.useState<AuthState>(authState || 'signUp')
+	const [state, setState] = React.useState<AuthState>(authState || 'signIn')
 	const {title, description, switchText, questionText} = AUTH_CONTENT[state]
 
 	const toggleState = () => {
-		const newState = state === 'signIn' ? 'signUp' : 'signIn'
+		const newState = state === 'signIn' ? 'signIn' : 'signUp'  
 		setState(newState)
 		router.push(`?authState=${newState}`, {scroll: false})
 	}
@@ -55,7 +55,7 @@ export default function AuthDialog() {
 
 				<ProvidersForm />
 
-				<div className='mt-4 inline-flex w-full items-center justify-between gap-x-2 text-sm'>
+				{/* <div className='mt-4 inline-flex w-full items-center justify-between gap-x-2 text-sm'>
 					<span>{questionText}</span>
 					<button
 						type='button'
@@ -63,7 +63,7 @@ export default function AuthDialog() {
 						className='text-muted-foreground hover:underline'>
 						{switchText}
 					</button>
-				</div>
+				</div> */}
 			</CardContent>
 		</Card>
 	)

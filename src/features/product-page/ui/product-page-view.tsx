@@ -1,9 +1,11 @@
 'use client'
 
+import {StoreIcon} from 'lucide-react'
 import React from 'react'
 import {useMedia, useMountedState} from 'react-use'
 import type {Product} from '~/payload/payload-types'
 import {formatPrice} from '~/shared/lib/utils'
+import {Badge} from '~/shared/ui/components/badge'
 import {ImageSlider} from '~/shared/ui/components/image-slider'
 import {Typography} from '~/shared/ui/components/typography'
 import {AddToCartButton} from './add-to-cart-button'
@@ -33,7 +35,18 @@ export const ProductPageView = ({product}: Props) => {
 				<Typography variant='h3'>{price}</Typography>
 				<Typography variant='p'>{product.description}</Typography>
 				<Typography variant='p'>{product.composition}</Typography>
-				{/* <Typography variant='p'>{product.ingredients}</Typography> */}
+				<div className='flex flex-wrap gap-x-2 gap-y-1'>
+					<Badge className='flex items-center py-1 md:py-2'>
+						<StoreIcon size={16} className='mr-1' />
+						Kromka Prešov: (8)
+					</Badge>
+					<Badge
+						className='flex items-center py-1 md:py-2'
+						variant={'destructive'}>
+						<StoreIcon size={16} className='mr-1' />
+						Kromka Košice: (0)
+					</Badge>
+				</div>
 			</div>
 
 			<div className='mt-10 lg:col-start-2 lg:row-span-2 lg:mt-0 lg:self-center'>

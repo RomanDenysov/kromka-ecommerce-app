@@ -49,6 +49,8 @@ export const Addresses: CollectionConfig = {
 			name: 'googleMapsUrl',
 			type: 'text',
 			label: 'Google Maps URL',
+			index: true,
 		},
 	],
+	timestamps: false,
 }

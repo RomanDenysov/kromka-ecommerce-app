@@ -83,18 +83,4 @@ export const Stores: CollectionConfig = {
 		},
 		slugField('name'),
 	],
-	hooks: {
-		afterRead: [
-			async ({doc, req}) => {
-				if (doc.address) {
-					const populatedAddress = await req.payload.findByID({
-						collection: COLLECTION_SLUG.ADDRESSES,
-						id: doc.address,
-					})
-					doc.address = populatedAddress
-				}
-				return doc
-			},
-		],
-	},
 }

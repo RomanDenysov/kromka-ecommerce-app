@@ -67,7 +67,7 @@ export interface User {
     | null;
   preferences?: {
     preferedStore?: (number | null) | Store;
-    preferedPaymentMethod?: ('inStore' | 'card' | 'stripe') | null;
+    preferedPaymentMethod?: ('store' | 'card') | null;
   };
   acceptedTerms: boolean;
   acceptedMailNotifications?: boolean | null;
@@ -113,8 +113,6 @@ export interface Address {
   zip: string;
   country: string;
   googleMapsUrl?: string | null;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -154,6 +152,40 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+  sizes?: {
+    sm?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    md?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    lg?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -187,12 +219,6 @@ export interface Product {
   name: string;
   description: string;
   composition?: string | null;
-  ingredients?:
-    | {
-        ingredient: string;
-        id?: string | null;
-      }[]
-    | null;
   price: number;
   category: number | Category;
   tags?: (number | Tag)[] | null;

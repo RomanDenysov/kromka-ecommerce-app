@@ -43,17 +43,6 @@ export default function ProvidersForm({disabled}: Props) {
 				{loading && <Loader2 size={20} className='mr-2 animate-spin' />}
 				Pokračovať z Facebook
 			</Button>
-			<Button
-				onClick={() => signIn()}
-				disabled={disabled || loading}
-				type='submit'
-				variant={'outline'}
-				size={'lg'}
-				className='relative w-full text-start font-medium'>
-				<FaFacebook className='-translate-y-1/2 absolute top-1/2 left-2 text-2xl text-blue-500' />
-				{loading && <Loader2 size={20} className='mr-2 animate-spin' />}
-				Pokračovať z ...
-			</Button>
 		</div>
 	)
 }

@@ -65,9 +65,8 @@ export const Users: CollectionConfig = {
 					type: 'select',
 					label: 'Preferred Payment Method',
 					options: [
-						{label: 'Pickup in store', value: 'inStore'},
+						{label: 'Pickup in store', value: 'store'},
 						{label: 'Card', value: 'card'},
-						{label: 'Stripe', value: 'stripe'},
 					],
 					admin: {
 						description: 'Preferred payment method of the user',
