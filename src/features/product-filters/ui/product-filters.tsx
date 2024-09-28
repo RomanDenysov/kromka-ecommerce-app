@@ -12,7 +12,7 @@ export default function ProductFilters() {
 	if (!categories || categories.length === 0) return null
 
 	return (
-		<div className='sticky top-16 mb-2'>
+		<div className='mb-2'>
 			<ScrollArea className='w-full whitespace-nowrap'>
 				<div className='flex flex-wrap gap-2'>
 					{categories.map((category) => (

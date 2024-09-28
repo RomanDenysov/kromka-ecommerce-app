@@ -10,7 +10,6 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 import {useUserQuery} from '~/entities/user/hooks/use-user-query'
-import type {User} from '~/payload/payload-types'
 import {cn, getNameInitials} from '~/shared/lib/utils'
 import {
 	Avatar,
@@ -133,27 +132,3 @@ const UserButton = () => {
 }
 
 export default UserButton
-
-const TriggerButton = ({user}: {user?: User | null}) => {
-	if (!user) {
-		return (
-			<Link
-				href={'/auth'}
-				className={cn(
-					buttonVariants({variant: 'ghost', size: 'icon'}),
-					'relative grid size-10 place-items-center rounded-full',
-				)}>
-				<LogInIcon size={24} />
-			</Link>
-		)
-	}
-
-	if (user) {
-		return (
-			<Avatar>
-				<AvatarImage src={user.image || undefined} />
-				<AvatarFallback>{user.name ?? '?'}</AvatarFallback>
-			</Avatar>
-		)
-	}
-}

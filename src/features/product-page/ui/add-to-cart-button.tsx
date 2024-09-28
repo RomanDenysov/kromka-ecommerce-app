@@ -1,7 +1,7 @@
 'use client'
 
 import {MinusIcon, PlusIcon} from 'lucide-react'
-import {useMountedState} from 'react-use'
+import {useMountedState, useToggle, useVibrate} from 'react-use'
 import {useCart} from '~/features/cart-page-view/hooks/use-cart'
 import type {Product} from '~/payload/payload-types'
 import {cn} from '~/shared/lib/utils'
@@ -17,12 +17,16 @@ export const AddToCartButton = ({product, disabled = false}: Props) => {
 	const items = useCart((state) => state.items)
 	const addItem = useCart((state) => state.addItem)
 	const removeItem = useCart((state) => state.removeItem)
+	 const [vibrating, toggleVibrating] = useToggle(false)
+
+	useVibrate(vibrating, [300, 100, 200, 100, 1000, 300], false)
 	if (!isMounted) return null
 
 	const currentQuantity =
 		items.find((item) => item.product.id === product.id)?.quantity || 0
 
 	const handleAddToCart = () => {
+		toggleVibrating()
 		if (currentQuantity >= 0) {
 			addItem({product, quantity: +1})
 		}

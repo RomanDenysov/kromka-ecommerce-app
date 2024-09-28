@@ -2,15 +2,14 @@
 
 import {ChevronRightIcon} from 'lucide-react'
 import Link from 'next/link'
+import {NAV_LINKS} from '~/shared/config/navigation'
 import {cn} from '~/shared/lib/utils'
 import {buttonVariants} from '~/shared/ui/components/button'
-import {NAV_LINKS} from '../header/header'
 
 export const FooterNav = () => {
-	const links = NAV_LINKS
 	return (
 		<div className='flex flex-col items-start justify-start space-y-1'>
-			{links.map((link) => (
+			{NAV_LINKS.map((link) => (
 				<Link
 					key={link.href}
 					href={link.href}

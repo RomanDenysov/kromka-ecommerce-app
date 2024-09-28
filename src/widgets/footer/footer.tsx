@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import StoreCard from '~/features/store-selector/ui/store-card'
 import Container from '~/shared/ui/components/container'
+import {Separator} from '~/shared/ui/components/separator'
 import {Typography} from '~/shared/ui/components/typography'
 import {Icons} from '~/shared/ui/icons'
 import {FooterContacts} from './footer-contacts'
@@ -11,12 +12,13 @@ export default function Footer() {
 	return (
 		<footer className='mx-auto bg-muted'>
 			<Container>
-				<div className='size-full border-border border-t py-10'>
+				<div className='size-full border-border border-t py-10 md:py-20'>
 					<div className='grid place-content-center'>
 						<Icons.logo className='size-10 fill-accent-foreground md:size-12' />
 					</div>
 				</div>
-				<div className='grid grid-cols-2 place-items-center items-start gap-x-6 gap-y-10 md:grid-cols-4'>
+				<Separator />
+				<div className='grid grid-cols-2 place-items-center items-start gap-x-6 gap-y-10 py-10 md:grid-cols-4 md:py-20'>
 					<div className='hidden md:block'>
 						<FooterNav />
 					</div>
@@ -36,6 +38,7 @@ export default function Footer() {
 						<StoreCard />
 					</div>
 				</div>
+				<Separator />
 			</Container>
 			<div className='flex size-full flex-col-reverse items-center justify-between space-y-2 px-4 pt-10 pb-4 md:flex-row md:px-10'>
 				<div className='w-full self-center md:self-start'>

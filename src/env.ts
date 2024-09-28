@@ -27,6 +27,7 @@ export const env = createEnv({
 	client: {
 		NEXT_PUBLIC_SERVER_URL: z.string().min(1),
 		NEXT_PUBLIC_STRIPE_PUBLIC_KEY: z.string().min(1),
+		NEXT_PUBLIC_MAPS_API_KEY: z.string().min(1),
 	},
 
 	runtimeEnv: {
@@ -35,6 +36,8 @@ export const env = createEnv({
 
 		AUTH_GOOGLE_ID: process.env.AUTH_GOOGLE_ID,
 		AUTH_GOOGLE_SECRET: process.env.AUTH_GOOGLE_SECRET,
+
+		NEXT_PUBLIC_MAPS_API_KEY: process.env.NEXT_PUBLIC_MAPS_API_KEY,
 
 		AUTH_SECRET: process.env.AUTH_SECRET,
 

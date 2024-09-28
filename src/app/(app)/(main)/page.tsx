@@ -5,7 +5,7 @@ import Container from '~/shared/ui/components/container'
 
 export default function HomePage() {
 	return (
-		<Container className='grid space-y-10 py-10 md:space-y-20'>
+		<Container className='grid space-y-10 pt-5 pb-20 sm:pt-10 md:space-y-20'>
 			<HeroGrid />
 			<ProductsReel
 				className='py-0'
