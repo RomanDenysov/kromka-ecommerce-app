@@ -15,10 +15,12 @@ const MemoizedStoreSelector = React.memo(StoreSelector)
 export default function EshopHeader() {
 	return (
 		<header className='sticky inset-x-0 top-0 z-50 bg-background'>
-			<Container className='h-fit space-y-5 border-border border-b md:space-y-10'>
+			<Container className='h-fit space-y-5 border-border border-b md:space-y-5'>
 				<div className='flex h-16 items-center justify-between'>
 					<div className='flex flex-1 items-center justify-start'>
-						<Navbar />
+						<React.Suspense fallback={null}>
+							<Navbar />
+						</React.Suspense>
 					</div>
 
 					<Link href='/' className='flex items-center justify-center'>
@@ -32,12 +34,12 @@ export default function EshopHeader() {
 						<CartButton />
 					</div>
 				</div>
-				<section className='space-y-5'>
+				<section className='relative space-y-5'>
 					<div className='flex flex-col items-start justify-between gap-y-4 sm:flex-row'>
 						<Heading title='Vitajte v našom obchode!' />
 						<MemoizedStoreSelector />
 					</div>
-					<div className='sticky top-16 '>
+					<div className='sticky inset-x-0 top-16 '>
 						<MemoizedProductFilters />
 					</div>
 				</section>

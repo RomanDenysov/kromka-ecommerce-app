@@ -3,11 +3,11 @@
 import {ChevronRightIcon} from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
-import type {ProductsQueryType} from '~/entities/product/models'
 import {ProductListing} from '~/features/products-reel/ui/product-listing'
+import type {ProductsQueryType} from '~/server/api/routers/products/models'
 import {cn} from '~/shared/lib/utils'
 import {Heading} from '~/shared/ui/components/heading'
-import {useInfiniteProductQuery} from '../hooks/use-infinite-products-query'
+import {api} from '~/trpc/react'
 
 type Props = {
 	className?: string
@@ -32,14 +32,21 @@ const ProductsReel = ({
 	query,
 	excludeProductId,
 }: Props) => {
-	// TODO: Implement loading state for infinite products query
-	const {products, isLoading} = useInfiniteProductQuery({
-		limit,
-		query,
-		cursor: 1,
-		excludeProductId,
-	})
 
+	const {data, isLoading} = api.products.getInfiniteProducts.useInfiniteQuery(
+		{
+			limit,
+			query,
+			excludeProductId,
+		},
+		{
+			getNextPageParam: (lastPage) => lastPage.nextPage,
+		},
+	)
+
+	const products = data?.pages.flatMap((page) => page.items)
+
+	if (!products || products.length === 0) return null
 	const renderProducts = () => {
 		if (isLoading) {
 			return (
@@ -53,7 +60,6 @@ const ProductsReel = ({
 				))
 			)
 		}
-
 		return products.map((product, index) => (
 			<MemoizedProductListing
 				key={`product-${product?.id || index.toFixed()}`}

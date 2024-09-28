@@ -2,7 +2,7 @@
 
 import {ImageIcon, X} from 'lucide-react'
 import Image from 'next/image'
-import type {Product} from '~/payload/payload-types'
+import type {Product} from '~/server/payload/payload-types'
 import {formatPrice} from '~/shared/lib/utils'
 import {Button} from '~/shared/ui/components/button'
 import {useCart} from '../../cart-page-view/hooks/use-cart'

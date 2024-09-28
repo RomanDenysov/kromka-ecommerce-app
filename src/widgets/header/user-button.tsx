@@ -9,7 +9,6 @@ import {
 	UserIcon,
 } from 'lucide-react'
 import Link from 'next/link'
-import {useUserQuery} from '~/entities/user/hooks/use-user-query'
 import {cn, getNameInitials} from '~/shared/lib/utils'
 import {
 	Avatar,
@@ -57,8 +56,11 @@ const LOGOUT_BTN = {
 }
 
 const UserButton = () => {
-	const {data: user, isLoading} = useUserQuery()
+	// const {data: user, isLoading} = useUserQuery()
 	// TODO: check if user is admin
+
+	const user = null
+	const isLoading = false
 	const isAdmin = user?.role === 'admin'
 
 	return (

@@ -1,7 +1,7 @@
 import {ImageIcon, X} from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import type {Product} from '~/payload/payload-types'
+import type {Product} from '~/server/payload/payload-types'
 import {useConfirm} from '~/shared/hooks/use-confirm'
 import {formatPrice} from '~/shared/lib/utils'
 import {Typography} from '~/shared/ui/components/typography'

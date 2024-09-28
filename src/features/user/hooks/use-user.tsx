@@ -1,6 +1,6 @@
 import {create} from 'zustand'
 import {createJSONStorage, persist} from 'zustand/middleware'
-import type {User} from '~/payload/payload-types'
+import type {User} from '~/server/payload/payload-types'
 
 type UserState = User
 

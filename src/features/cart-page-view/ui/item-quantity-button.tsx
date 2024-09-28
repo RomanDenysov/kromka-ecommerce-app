@@ -1,5 +1,5 @@
 import {MinusIcon, PlusIcon} from 'lucide-react'
-import type {Product} from '~/payload/payload-types'
+import type {Product} from '~/server/payload/payload-types'
 import {formatPrice} from '~/shared/lib/utils'
 import {Typography} from '~/shared/ui/components/typography'
 import {useCart} from '../hooks/use-cart'

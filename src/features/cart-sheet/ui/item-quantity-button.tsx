@@ -1,7 +1,7 @@
 'use client'
 
 import {Minus, Plus} from 'lucide-react'
-import type {Product} from '~/payload/payload-types'
+import type {Product} from '~/server/payload/payload-types'
 import {useCart} from '../../cart-page-view/hooks/use-cart'
 
 type Props = {

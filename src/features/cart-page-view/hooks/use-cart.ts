@@ -1,6 +1,6 @@
 import {create} from 'zustand'
 import {createJSONStorage, persist} from 'zustand/middleware'
-import type {Product} from '~/payload/payload-types'
+import type {Product} from '~/server/payload/payload-types'
 
 type CartItem = {
 	quantity: number

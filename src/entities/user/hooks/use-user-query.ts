@@ -3,14 +3,11 @@
 import {useQuery} from '@tanstack/react-query'
 import React from 'react'
 import {useUser} from '~/features/user/hooks/use-user'
-import {getUser} from '../actions'
+import {getUser} from '~/server/api/routers/users/service'
 
 export const useUserQuery = () => {
 	const setUser = useUser((state) => state.setUser)
 	const user = useUser((state) => state.user)
-
-	console.log('🚀 ~ file: use-user-query.ts:12 ~ useUserQuery ~ user:', user)
-
 
 	const query = useQuery({
 		queryKey: ['user'],
@@ -18,10 +15,6 @@ export const useUserQuery = () => {
 		enabled: !user,
 	})
 
-	console.log(
-		'🚀 ~ file: use-user-query.ts:23 ~ useUserQuery ~ query:',
-		query.data,
-	)
 	React.useEffect(() => {
 
 

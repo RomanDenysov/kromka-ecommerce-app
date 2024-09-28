@@ -3,7 +3,7 @@
 import {MinusIcon, PlusIcon} from 'lucide-react'
 import type React from 'react'
 import {useCart} from '~/features/cart-page-view/hooks/use-cart'
-import type {Product} from '~/payload/payload-types'
+import type {Product} from '~/server/payload/payload-types'
 import {Button} from '~/shared/ui/components/button'
 import {Typography} from '~/shared/ui/components/typography'
 

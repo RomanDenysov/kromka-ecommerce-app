@@ -1,6 +1,6 @@
 import {create} from 'zustand'
 import {createJSONStorage, persist} from 'zustand/middleware'
-import type {Store} from '~/payload/payload-types'
+import type {Store} from '~/server/payload/payload-types'
 
 type State = {
 	stores: Store[]

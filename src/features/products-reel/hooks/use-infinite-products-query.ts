@@ -2,7 +2,7 @@ import {useInfiniteQuery} from '@tanstack/react-query'
 import React from 'react'
 import {getInfiniteProducts} from '~/entities/product/actions'
 import type {InfiniteProductsQueryInput} from '~/entities/product/models'
-import type {Product} from '~/payload/payload-types'
+import type {Product} from '~/server/payload/payload-types'
 
 export function useInfiniteProductQuery(params: InfiniteProductsQueryInput) {
 	const {data, isLoading, hasNextPage, fetchNextPage, error, isError} =

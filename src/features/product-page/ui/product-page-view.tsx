@@ -3,7 +3,7 @@
 import {StoreIcon} from 'lucide-react'
 import React from 'react'
 import {useMedia, useMountedState} from 'react-use'
-import type {Product} from '~/payload/payload-types'
+import type {Product} from '~/server/payload/payload-types'
 import {formatPrice} from '~/shared/lib/utils'
 import {Badge} from '~/shared/ui/components/badge'
 import {ImageSlider} from '~/shared/ui/components/image-slider'

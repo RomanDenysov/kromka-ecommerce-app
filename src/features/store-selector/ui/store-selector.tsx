@@ -18,14 +18,14 @@ import {
 	PopoverTrigger,
 } from '~/shared/ui/components/popover'
 import {Skeleton} from '~/shared/ui/components/skeleton'
-import useStoreQuery from '../hooks/use-stores-query'
+import {api} from '~/trpc/react'
 
 type Props = {
 	width?: string
 }
 
 export default function StoreSelector({width}: Props) {
-	const {data: stores, isLoading} = useStoreQuery()
+	const {data: stores, isLoading} = api.stores.getStores.useQuery()
 	const [open, setOpen] = React.useState<boolean>(false)
 	const [value, setValue] = React.useState<string | null>(null)
 

@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import React from 'react'
-import type {Product} from '~/payload/payload-types'
+import type {Product} from '~/server/payload/payload-types'
 import {cn, formatPrice} from '~/shared/lib/utils'
 import {ImageSlider} from '~/shared/ui/components/image-slider'
 import {Skeleton} from '~/shared/ui/components/skeleton'

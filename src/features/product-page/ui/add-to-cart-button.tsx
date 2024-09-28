@@ -3,7 +3,7 @@
 import {MinusIcon, PlusIcon} from 'lucide-react'
 import {useMountedState, useToggle, useVibrate} from 'react-use'
 import {useCart} from '~/features/cart-page-view/hooks/use-cart'
-import type {Product} from '~/payload/payload-types'
+import type {Product} from '~/server/payload/payload-types'
 import {cn} from '~/shared/lib/utils'
 import {Button} from '~/shared/ui/components/button'
 
