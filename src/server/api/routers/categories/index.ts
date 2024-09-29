@@ -1,6 +1,6 @@
 import {createTRPCRouter, publicProcedure} from '../../trpc'
-import {fetchCategories} from './services'
 import {categoriesSchema} from './models'
+import {fetchCategories} from './services'
 
 export const categoriesRouter = createTRPCRouter({
 	getAll: publicProcedure.output(categoriesSchema).query(async () => {

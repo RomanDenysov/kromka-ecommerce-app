@@ -32,7 +32,6 @@ const ProductsReel = ({
 	query,
 	excludeProductId,
 }: Props) => {
-
 	const {data, isLoading} = api.products.getInfiniteProducts.useInfiniteQuery(
 		{
 			limit,

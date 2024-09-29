@@ -13,7 +13,7 @@ export function useInfiniteProductQuery(params: InfiniteProductsQueryInput) {
 			getNextPageParam: (lastPage) => lastPage.nextPage,
 			initialPageParam: 1,
 		})
-		
+
 	const products = React.useMemo((): (Product | null)[] => {
 		if (isLoading) {
 			return new Array(params.limit).fill(null)

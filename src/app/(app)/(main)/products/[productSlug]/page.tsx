@@ -32,9 +32,6 @@ export default async function ProductPage({params, searchParams}: Props) {
 
 	const category = product.category
 
-	console.log('🚀 ~ file: page.tsx:35 ~ ProductPage ~ category:', category)
-
-
 	return (
 		<Container className='space-y-10 py-10'>
 			<section className='pt-10'>

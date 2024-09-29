@@ -5,7 +5,6 @@ import React from 'react'
 import type {AuthState} from '~/features/auth/types'
 import ProvidersForm from '~/features/auth/ui/providers-form'
 import SignInForm from '~/features/auth/ui/sign-in-form'
-import SignUpForm from '~/features/auth/ui/sign-up-form'
 import {
 	Card,
 	CardContent,
@@ -38,7 +37,7 @@ export default function AuthDialog() {
 	const {title, description, switchText, questionText} = AUTH_CONTENT[state]
 
 	const toggleState = () => {
-		const newState = state === 'signIn' ? 'signIn' : 'signUp'  
+		const newState = state === 'signIn' ? 'signIn' : 'signUp'
 		setState(newState)
 		router.push(`?authState=${newState}`, {scroll: false})
 	}
@@ -49,7 +48,7 @@ export default function AuthDialog() {
 				<CardDescription>{description}</CardDescription>
 			</CardHeader>
 			<CardContent>
-				{state === 'signIn' ? <SignInForm /> : <SignUpForm />}
+				{state === 'signIn' ? <SignInForm /> : <SignInForm />}
 
 				<Divider />
 

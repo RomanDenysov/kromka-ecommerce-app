@@ -13,7 +13,7 @@ const checkoutSchema = z.object({
 		message: 'Musíte prijať podmienky používania',
 		path: ['terms'],
 	}),
-	paymentMethod: z.enum(['inStore', 'card', 'stripe']),
+	paymentMethod: z.string().min(1, 'Platobný spôsob je povinný'),
 	store: z.object({
 		name: z.string().min(1, 'Názov obchodu je povinný'),
 	}),
@@ -33,7 +33,6 @@ export default function CheckoutBlock() {
 		phone: '',
 		terms: false,
 		paymentMethod: 'inStore',
-		deliveryMethod: 'pickup',
 		store: {name: ''},
 		pickupDate: new Date(),
 	}

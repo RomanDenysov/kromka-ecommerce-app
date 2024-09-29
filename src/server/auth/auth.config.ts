@@ -18,7 +18,7 @@ declare module 'next-auth' {
 	interface User extends Pick<JWT, 'id' | 'role'> {}
 	interface Session extends DefaultSession {
 		user: User & DefaultSession['user']
-	} 
+	}
 }
 
 const authConfig: NextAuthConfig = {
@@ -47,8 +47,6 @@ const authConfig: NextAuthConfig = {
 	],
 	callbacks: {
 		jwt: async ({token, user, profile}) => {
-			// console.log("JWT Callback - User:", user);
-			// console.log("JWT Callback - Profile:", profile);
 			if (user) {
 				if (user.id) {
 					token.id = user.id as string

@@ -1,4 +1,3 @@
-
 export const NAV_LINKS = [
 	{href: '/', label: 'Domov'},
 	{href: '/products', label: 'Nakupovat'},

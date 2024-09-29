@@ -6,7 +6,6 @@ import {Icons} from '~/shared/ui/icons'
 import {Navbar} from './navbar'
 import UserButton from './user-button'
 
-
 export default function Header() {
 	return (
 		<header className='sticky inset-x-0 top-0 z-50 bg-background'>

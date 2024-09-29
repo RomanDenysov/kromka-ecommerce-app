@@ -4,7 +4,6 @@ import CheckoutBlock from '~/features/checkout/ui/chekout-block'
 import Container from '~/shared/ui/components/container'
 
 export default function CartPage() {
-
 	return (
 		<Container className='space-y-6 py-10'>
 			<CartTitleCounter />

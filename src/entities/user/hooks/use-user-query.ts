@@ -16,8 +16,6 @@ export const useUserQuery = () => {
 	})
 
 	React.useEffect(() => {
-
-
 		if (query.data && query.isSuccess) {
 			setUser(query.data)
 		}

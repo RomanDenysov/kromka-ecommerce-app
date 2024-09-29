@@ -1,4 +1,3 @@
-
 import BlogHeroCard from '~/features/blog-hero/ui/blog-hero-card'
 import Container from '~/shared/ui/components/container'
 

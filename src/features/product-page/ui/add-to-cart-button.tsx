@@ -17,7 +17,7 @@ export const AddToCartButton = ({product, disabled = false}: Props) => {
 	const items = useCart((state) => state.items)
 	const addItem = useCart((state) => state.addItem)
 	const removeItem = useCart((state) => state.removeItem)
-	 const [vibrating, toggleVibrating] = useToggle(false)
+	const [vibrating, toggleVibrating] = useToggle(false)
 
 	useVibrate(vibrating, [300, 100, 200, 100, 1000, 300], false)
 	if (!isMounted) return null
