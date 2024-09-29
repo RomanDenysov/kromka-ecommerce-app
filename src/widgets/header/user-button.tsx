@@ -9,6 +9,7 @@ import {
 	UserIcon,
 } from 'lucide-react'
 import Link from 'next/link'
+import {useUser} from '~/features/user/hooks/use-user'
 import {cn, getNameInitials} from '~/shared/lib/utils'
 import {
 	Avatar,
@@ -59,9 +60,8 @@ const UserButton = () => {
 	// const {data: user, isLoading} = useUserQuery()
 	// TODO: check if user is admin
 
-	const user = null
+	const user = useUser((state) => state.user)
 	const isLoading = false
-	const isAdmin = user?.role === 'admin'
 
 	return (
 		<DropdownMenu>
@@ -110,14 +110,12 @@ const UserButton = () => {
 						</DropdownMenuItem>
 					))}
 					<DropdownMenuSeparator />
-					{isAdmin && (
-						<DropdownMenuItem asChild>
-							<Link href={ADMIN_BTN.href}>
-								<ADMIN_BTN.icon size={20} className='mr-2' />
-								<span>{ADMIN_BTN.label}</span>
-							</Link>
-						</DropdownMenuItem>
-					)}
+					<DropdownMenuItem asChild>
+						<Link href={ADMIN_BTN.href}>
+							<ADMIN_BTN.icon size={20} className='mr-2' />
+							<span>{ADMIN_BTN.label}</span>
+						</Link>
+					</DropdownMenuItem>
 
 					<DropdownMenuSeparator />
 

@@ -5,7 +5,7 @@ import {getPayload} from '~/server/payload/utils/get-payload'
 import {PayloadNotConfiguredError} from '~/shared/lib/errors'
 import type {PublicCategory} from './models'
 
-export const fetchCategories = async (): Promise<PublicCategory[] | Error> => {
+export const fetchCategories = async (): Promise<PublicCategory[]> => {
 	const payload = await getPayload()
 	if (!payload) throw new PayloadNotConfiguredError()
 
@@ -41,6 +41,6 @@ export const fetchCategories = async (): Promise<PublicCategory[] | Error> => {
 		return categoriesWithProducts.filter((category) => category !== null)
 	} catch (error) {
 		console.error('Error fetching categories:', error)
-		throw new Error('Error fetching categories')
+		return []
 	}
 }

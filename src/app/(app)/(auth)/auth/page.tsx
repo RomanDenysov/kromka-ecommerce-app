@@ -1,11 +1,14 @@
 import Image from 'next/image'
+import React from 'react'
 import AuthDialog from '~/features/auth/ui/auth-dialog'
 
 export default function AuthPage() {
 	return (
 		<section className='relative m-auto grid size-full min-h-screen place-items-center'>
 			<div className='z-40'>
-				<AuthDialog />
+				<React.Suspense fallback={null}>
+					<AuthDialog />
+				</React.Suspense>
 			</div>
 			<Image
 				src={'/images/KROMKA_VYKLAD.webp'}
