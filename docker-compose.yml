@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
 
   watchtower:
@@ -113,7 +111,7 @@ volumes:
 
 secrets:
   postgres-password:
-    file: db/password.txt
+    file: ../db/password.txt
   # DATABASE_URI:
   #   external: true
   # PAYLOAD_SECRET:
