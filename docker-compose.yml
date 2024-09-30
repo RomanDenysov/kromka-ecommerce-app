@@ -40,7 +40,7 @@ services:
   kromka-app:
     image: ghcr.io/romandenysov/kromka-app:prod
     env_file:
-      - home/kromka/.env
+      - ../.env
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.kromka-app.rule=Host(`pekarenkromka.sk`)"
