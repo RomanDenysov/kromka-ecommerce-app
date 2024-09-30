@@ -41,7 +41,7 @@ services:
       - ../.env
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.kromka-app.rule=Host(`pekarenkromka.sk`)"
+      - "traefik.http.routers.kromka-app.rule=Host(`pekarenkromka.sk`) || Host(`www.pekarenkromka.sk`)"
       - "traefik.http.routers.kromka-app.entrypoints=websecure"
       - "traefik.http.routers.kromka-app.tls.certresolver=myresolver"
       - "com.centurylinklabs.watchtower.enable=true"
@@ -53,7 +53,6 @@ services:
       - postgres
     # ports:
     #   - '127.0.0.1:3000:3000'
-    command: sh -c "cross-env NODE_OPTIONS=--no-deprecation next start"
     # environment:
     #   NEXT_PUBLIC_SERVER_URL: ${NEXT_PUBLIC_SERVER_URL}
     #   DATABASE_URI: ${DATABASE_URI}
