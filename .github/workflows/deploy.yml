@@ -36,7 +36,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ toLower(github.actor) }}/kromka-app:prod
+          tags: ghcr.io/romandenysov/kromka-app:prod
           build-args: |
             DATABASE_URI=${{ secrets.DATABASE_URI }}
             PAYLOAD_SECRET=${{ secrets.PAYLOAD_SECRET }}
