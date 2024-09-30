@@ -56,18 +56,16 @@ export const ProductPageView = ({product}: Props) => {
 			</div>
 
 			<div className='mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-end'>
-				<>
-					{isMobile ? (
-						<div className='fixed inset-x-0 bottom-0 z-50 h-[68px] w-full space-y-2.5 border-gray-100 border-t bg-white px-4 py-1 sm:relative sm:bottom-auto'>
-							<div className='mx-auto h-1.5 w-1/5 rounded-lg bg-gray-200' />
-							<AddToCartButton product={product} />
-						</div>
-					) : (
-						<div>
-							<AddToCartButton product={product} />
-						</div>
-					)}
-				</>
+				{isMobile ? (
+					<div className='fixed inset-x-0 bottom-0 z-50 h-[68px] w-full space-y-2.5 border-gray-100 border-t bg-white px-4 py-1 sm:relative sm:bottom-auto'>
+						<div className='mx-auto h-1.5 w-1/5 rounded-lg bg-gray-200' />
+						<AddToCartButton product={product} />
+					</div>
+				) : (
+					<div>
+						<AddToCartButton product={product} />
+					</div>
+				)}
 			</div>
 		</div>
 	)

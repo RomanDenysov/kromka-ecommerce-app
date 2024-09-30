@@ -23,11 +23,9 @@ export const ProductPageViewPlaceholder = () => {
 			</div>
 
 			<div className='mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-end'>
-				<>
-					<div>
-						<Skeleton className='h-12 w-full' />
-					</div>
-				</>
+				<div>
+					<Skeleton className='h-12 w-full' />
+				</div>
 			</div>
 		</article>
 	)
