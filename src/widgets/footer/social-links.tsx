@@ -1,4 +1,3 @@
-'use client'
 import {FacebookIcon, InstagramIcon} from 'lucide-react'
 import Link from 'next/link'
 import {cn} from '~/shared/lib/utils'

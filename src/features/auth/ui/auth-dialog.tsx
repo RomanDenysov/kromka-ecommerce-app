@@ -2,7 +2,6 @@
 
 import {useRouter, useSearchParams} from 'next/navigation'
 import React from 'react'
-import type {AuthState} from '~/features/auth/types'
 import ProvidersForm from '~/features/auth/ui/providers-form'
 import SignInForm from '~/features/auth/ui/sign-in-form'
 import {
@@ -29,12 +28,14 @@ const AUTH_CONTENT = {
 	},
 }
 
+type AuthState = 'signIn' | 'signUp'
+
 export default function AuthDialog() {
 	const router = useRouter()
 	const searchParams = useSearchParams()
 	const authState = searchParams.get('authState') as AuthState | null
 	const [state, setState] = React.useState<AuthState>(authState || 'signIn')
-	const {title, description, switchText, questionText} = AUTH_CONTENT[state]
+	const {title, description, switchText, questionText} = AUTH_CONTENT[state] ?? {}
 
 	const toggleState = () => {
 		const newState = state === 'signIn' ? 'signIn' : 'signUp'

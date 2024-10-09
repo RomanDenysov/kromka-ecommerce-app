@@ -15,11 +15,12 @@ type Props = {
 	title?: string
 	subtitle?: string
 	limit?: number
+	filteredOptions?: string
 	query: ProductsQueryType
 	excludeProductId?: number
 }
 
-const FALLBACK_LIMIT = 4
+const FALLBACK_LIMIT = 8
 
 const MemoizedProductListing = React.memo(ProductListing)
 
@@ -29,19 +30,45 @@ const ProductsReel = ({
 	title,
 	subtitle,
 	limit = FALLBACK_LIMIT,
+	filteredOptions,
 	query,
 	excludeProductId,
 }: Props) => {
-	const {data, isLoading} = api.products.getInfiniteProducts.useInfiniteQuery(
+	const {
+		data,
+		isLoading,
+		isFetchingNextPage,
+		hasNextPage,
+		fetchNextPage,
+		isError,
+	} = api.products.getInfiniteProducts.useInfiniteQuery(
 		{
 			limit,
-			query,
+			query: {...query, categorySlug: filteredOptions},
 			excludeProductId,
 		},
 		{
 			getNextPageParam: (lastPage) => lastPage.nextPage,
 		},
 	)
+
+	React.useEffect(() => {
+		const handleScroll = () => {
+			if (
+				window.innerHeight + window.scrollY >=
+					document.body.offsetHeight - 500 &&
+				hasNextPage &&
+				!isFetchingNextPage
+			) {
+				fetchNextPage()
+			}
+		}
+
+		window.addEventListener('scroll', handleScroll)
+		return () => {
+			window.removeEventListener('scroll', handleScroll)
+		}
+	}, [fetchNextPage, hasNextPage, isFetchingNextPage])
 
 	const products = data?.pages.flatMap((page) => page.items)
 
@@ -59,6 +86,7 @@ const ProductsReel = ({
 				))
 			)
 		}
+
 		return products.map((product, index) => (
 			<MemoizedProductListing
 				key={`product-${product?.id || index.toFixed()}`}

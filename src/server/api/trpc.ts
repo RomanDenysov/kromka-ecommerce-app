@@ -2,14 +2,18 @@ import {TRPCError, initTRPC} from '@trpc/server'
 import superjson from 'superjson'
 import {ZodError} from 'zod'
 import {auth} from '../auth'
+import {getPayload} from '../payload/utils/get-payload'
 
 export const createTRPCContext = async (opts: {
 	headers: Headers
 }) => {
 	const session = await auth()
+	const payload = await getPayload()
+	if (!payload) throw new Error('Payload not configured')
 
 	return {
 		session,
+		payload,
 		...opts,
 	}
 }

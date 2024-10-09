@@ -10,7 +10,7 @@ export default function HomeLayout({
 	return (
 		<React.Fragment>
 			<Header />
-			<main className='relative mx-auto min-h-screen'>{children}</main>
+			<main className='relative mx-auto size-full'>{children}</main>
 			<Footer />
 		</React.Fragment>
 	)

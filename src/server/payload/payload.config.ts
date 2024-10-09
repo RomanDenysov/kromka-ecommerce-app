@@ -44,6 +44,7 @@ export default buildConfig({
 		Orders,
 		Inventory,
 	],
+	telemetry: false,
 	globals: [AppOptions],
 	cors: ['https://checkout.stripe.com', env.NEXT_PUBLIC_SERVER_URL],
 	csrf: ['https://checkout.stripe.com', env.NEXT_PUBLIC_SERVER_URL],

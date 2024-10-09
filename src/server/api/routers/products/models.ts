@@ -3,14 +3,15 @@ import {categorySchema} from '../categories/models'
 
 export const queryValidator = z.object({
 	category: z.number().optional(),
+	categorySlug: z.string().optional(),
 	search: z.string().max(100).optional(),
-	sort: z.enum(['asc', 'desc', 'adminSortRank']).optional(),
+	sort: z.string().optional(),
 	limit: z.number().default(10).optional(),
 })
 
 export const infiniteQueryValidator = z.object({
-	limit: z.number().min(1).max(100),
-	cursor: z.number().nullish(),
+	limit: z.number().min(1).max(100).optional(),
+	cursor: z.number().optional(),
 	query: queryValidator,
 	excludeProductId: z.number().optional(),
 })

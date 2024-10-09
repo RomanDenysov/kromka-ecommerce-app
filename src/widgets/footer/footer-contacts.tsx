@@ -1,4 +1,3 @@
-'use client'
 import {MailIcon, PhoneIcon} from 'lucide-react'
 import Link from 'next/link'
 import {cn} from '~/shared/lib/utils'
@@ -8,12 +7,12 @@ const FOOTER_CONTACTS = [
 	{
 		href: 'mailto:info@pekarenkromka.sk',
 		icon: MailIcon,
-		label: 'Nas mail',
+		label: 'Email',
 	},
 	{
 		href: 'tel:+42077777777',
 		icon: PhoneIcon,
-		label: 'Nas telefon',
+		label: 'Telefon',
 	},
 ]
 

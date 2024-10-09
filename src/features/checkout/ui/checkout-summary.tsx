@@ -3,6 +3,7 @@
 import {Loader2} from 'lucide-react'
 import {useCart} from '~/features/cart-page-view/hooks/use-cart'
 import {formatPrice} from '~/shared/lib/utils'
+import {LoaderButton} from '~/shared/ui/components/loader-button'
 import {Typography} from '~/shared/ui/components/typography'
 
 export const CheckoutSummary = () => {
@@ -95,6 +96,9 @@ export const CheckoutSummary = () => {
 					</Typography>
 				</div>
 			</div>
+			<LoaderButton isLoading={false} size={'lg'} className='mt-6 w-full'>
+				Objednať
+			</LoaderButton>
 		</div>
 	)
 }

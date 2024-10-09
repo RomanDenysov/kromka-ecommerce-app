@@ -5,9 +5,5 @@ export default async function AuthLayout({
 	// const user = session?.user
 	// if (user) redirect('/')
 
-	return (
-		<main className='relative grid w-screen place-items-center'>
-			{children}
-		</main>
-	)
+	return <main className='relative size-full '>{children}</main>
 }

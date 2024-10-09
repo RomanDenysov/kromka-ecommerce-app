@@ -74,6 +74,7 @@ export const CartSheet = () => {
 										href='/cart'
 										className={buttonVariants({
 											className: 'w-full',
+											size: 'lg',
 										})}>
 										Prejsť k pokladni
 									</Link>

@@ -1,5 +1,3 @@
-'use client'
-
 import {ChevronRightIcon} from 'lucide-react'
 import Link from 'next/link'
 import {NAV_LINKS} from '~/shared/config/navigation'

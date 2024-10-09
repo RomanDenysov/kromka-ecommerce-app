@@ -156,20 +156,22 @@ export const CheckoutInfo = () => {
 				</Form>
 			</div>
 
-			<div className='w-full text-center'>
-				<Separator className='mb-4' />
-				<Typography variant='span' className='text-muted-foreground'>
-					alebo prihlaste sa do svojho účtu
-				</Typography>
-				<Link
-					href={{pathname: '/auth', query: {authState: 'signIn'}}}
-					className={cn(
-						buttonVariants({variant: 'outline', size: 'lg'}),
-						'mt-4 w-full',
-					)}>
-					Prihlásiť sa
-				</Link>
-			</div>
+			{user && (
+				<div className='w-full text-center'>
+					<Separator className='mb-4' />
+					<Typography variant='span' className='text-muted-foreground'>
+						alebo prihlaste sa do svojho účtu
+					</Typography>
+					<Link
+						href={{pathname: '/auth', query: {authState: 'signIn'}}}
+						className={cn(
+							buttonVariants({variant: 'outline', size: 'lg'}),
+							'mt-4 w-full',
+						)}>
+						Prihlásiť sa
+					</Link>
+				</div>
+			)}
 		</div>
 	)
 }

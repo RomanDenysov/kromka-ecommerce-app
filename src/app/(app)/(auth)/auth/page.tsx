@@ -1,10 +1,11 @@
+
 import Image from 'next/image'
 import React from 'react'
 import AuthDialog from '~/features/auth/ui/auth-dialog'
 
 export default function AuthPage() {
 	return (
-		<section className='relative m-auto grid size-full min-h-screen place-items-center'>
+		<section className='relative m-auto grid size-full min-h-screen place-items-center bg-background'>
 			<div className='z-40'>
 				<React.Suspense fallback={null}>
 					<AuthDialog />

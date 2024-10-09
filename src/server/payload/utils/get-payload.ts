@@ -13,3 +13,5 @@ export async function getPayload(): Promise<
 	}
 	return payloadInstance
 }
+
+export type GetPayloadType = Awaited<ReturnType<typeof getPayload>>

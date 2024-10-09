@@ -1,8 +1,9 @@
 import 'server-only'
 
 import {cache} from 'react'
+import {env} from '~/env'
 import type {UserInfoFormData} from '~/features/checkout/models'
-import {auth} from '~/server/auth'
+import {auth, signIn} from '~/server/auth'
 import {COLLECTION_SLUG} from '~/server/payload/config'
 import type {User} from '~/server/payload/payload-types'
 import {getPayload} from '~/server/payload/utils/get-payload'
@@ -54,5 +55,25 @@ export async function updateUserInfo(data: UserInfoFormData) {
 	} catch (error) {
 		console.error('[USER ACTIONS]: Failed to update user info', error)
 		return null
+	}
+}
+
+export async function signInWithEmail(email: string) {
+	const confirmUrl = new URL(
+		`${env.NEXT_PUBLIC_SERVER_URL}/confirm-email?email=${email}`,
+	)
+	const redirectLink = email.split('@')[1]
+
+	console.log(
+		'🚀 ~ file: service.ts:67 ~ signInWithEmail ~ redirectLink:',
+		redirectLink,
+	)
+
+	try {
+		await signIn('nodemailer', {email, redirectTo: '/'})
+		return {success: true, url: confirmUrl.toString(), emailLink: redirectLink}
+	} catch (error) {
+		console.error('[SIGN IN WITH EMAIL]:', error)
+		return {success: false, url: null, emailLink: ''}
 	}
 }

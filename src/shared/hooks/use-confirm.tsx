@@ -41,16 +41,16 @@ export const useConfirm = (
 	const ConfirmationDialog = () => (
 		<Dialog open={promise !== null} onOpenChange={handleClose}>
 			<DialogContent className='px-6'>
-				<DialogHeader>
+				<DialogHeader className='space-y-4 '>
 					<DialogTitle>{title}</DialogTitle>
 					<DialogDescription>{message}</DialogDescription>
 				</DialogHeader>
 				<DialogFooter className='gap-y-2 pt-2'>
 					<Button onClick={handleCancel} variant={'outline'} className='w-full'>
-						Cancel
+						Zrušiť
 					</Button>
 					<Button onClick={handleConfirm} className='w-full'>
-						Confirm
+						Potvrdiť
 					</Button>
 				</DialogFooter>
 			</DialogContent>

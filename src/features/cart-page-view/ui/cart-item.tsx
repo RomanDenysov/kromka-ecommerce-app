@@ -15,8 +15,8 @@ type Props = {
 
 export const CartItem = ({product, quantity}: Props) => {
 	const [ConfirmDialog, confirm] = useConfirm(
-		'Zmazat položku',
-		'Opravdu chcete smazat tuto položku z košíku?',
+		'Odstrániť produkt',
+		`Chcete odstrániť ${product?.name} z košíka?`,
 	)
 	const removeItem = useCart((state) => state.removeItem)
 

@@ -1,50 +1,32 @@
 import 'server-only'
 
+import {fromPairs, isInteger, map} from 'lodash'
 import {COLLECTION_SLUG} from '~/server/payload/config'
-import {getPayload} from '~/server/payload/utils/get-payload'
+import type {GetPayloadType} from '~/server/payload/utils/get-payload'
 import {AVAILABLE_PRODUCTS} from '~/shared/config/constants'
-import {InActionsError, PayloadError} from '~/shared/lib/errors'
+import {InActionsError} from '~/shared/lib/errors'
 import type {InfiniteProductsQueryInput, ProductSlug} from './models'
 
 export async function fetchInfiniteProducts(
+	payload: GetPayloadType,
 	params: InfiniteProductsQueryInput,
 ) {
 	try {
 		const {query, cursor, excludeProductId} = params
-		const {sort, limit, ...queryOpts} = query
-		const page = cursor || 1
+		const {sort, limit, categorySlug, ...queryOpts} = query
 
-		const payload = await getPayload()
-		if (!payload) throw new PayloadError('Payload not configured (infinite)')
+		const page = getPage(cursor)
+		const conditions = buildConditions(queryOpts, excludeProductId)
 
-		const parsedQueryOpts: Record<string, {equals: string | number}> = {}
-
-		for (const [key, value] of Object.entries(queryOpts)) {
-			parsedQueryOpts[key] = {
-				equals: value,
-			}
-		}
-		// TODO: Add support for multiple filters
-		// const parsedQuery = Object.keys(parsedQueryOpts).length > 0 ? { AND: parsedQueryOpts } : {}
-		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-		const conditions: Record<string, any> = {
-			status: {
-				in: AVAILABLE_PRODUCTS,
-			},
-			...parsedQueryOpts,
-		}
-
-		if (excludeProductId) {
-			conditions.id = {
-				not_equals: excludeProductId,
+		if (categorySlug) {
+			const categoryId = await getCategoryId(payload, categorySlug)
+			conditions.category = {
+				equals: categoryId,
 			}
 		}
 
-		const {
-			docs: items,
-			hasNextPage,
-			nextPage,
-		} = await payload.find({
+		// Запрос на получение продуктов с обновленными условиями
+		const {docs: items, hasNextPage, nextPage} = await payload.find({
 			collection: COLLECTION_SLUG.PRODUCTS,
 			where: conditions,
 			sort,
@@ -63,11 +45,53 @@ export async function fetchInfiniteProducts(
 	}
 }
 
-export async function fetchProduct(slug: ProductSlug) {
-	try {
-		const payload = await getPayload()
-		if (!payload) throw new PayloadError('Payload not configured (getProduct)')
+function getPage(cursor: number | undefined): number {
+	return cursor && isInteger(cursor) && cursor > 0 ? cursor : 1
+}
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+type QueryOptsType = Record<string, any>
+function buildConditions(queryOpts: QueryOptsType, excludeProductId?: number) {
+	const parsedQueryOpts = fromPairs(
+		map(queryOpts, (value, key) => [key, {equals: value}]),
+	)
 
+	const conditions: QueryOptsType = {
+		status: {
+			in: AVAILABLE_PRODUCTS,
+		},
+		...parsedQueryOpts,
+	}
+
+	if (excludeProductId) {
+		conditions.id = {
+			not_equals: excludeProductId,
+		}
+	}
+
+	return conditions
+}
+async function getCategoryId(
+	payload: GetPayloadType,
+	categorySlug: string,
+): Promise<number | Error> {
+	const categoryResult = await payload.find({
+		collection: COLLECTION_SLUG.CATEGORIES,
+		where: {
+			slug: {
+				equals: categorySlug,
+			},
+		},
+		limit: 1,
+	})
+
+	if (categoryResult.docs[0] && categoryResult.docs.length > 0) {
+		return categoryResult.docs[0].id
+	}
+	throw new InActionsError('CATEGORY', 'Category not found')
+}
+
+export async function fetchProduct(payload: GetPayloadType, slug: ProductSlug) {
+	try {
 		const result = await payload.find({
 			collection: COLLECTION_SLUG.PRODUCTS,
 			where: {
@@ -76,7 +100,7 @@ export async function fetchProduct(slug: ProductSlug) {
 				},
 			},
 			limit: 1,
-			depth: 3,
+			depth: 2,
 		})
 
 		if (result.docs.length === 0) {

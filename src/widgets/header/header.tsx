@@ -1,17 +1,24 @@
+import {AlignJustifyIcon} from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 import CartButton from '~/features/cart-sheet/ui/cart-button'
+import {Button} from '~/shared/ui/components/button'
 import Container from '~/shared/ui/components/container'
 import {Icons} from '~/shared/ui/icons'
 import {Navbar} from './navbar'
-import UserButton from './user-button'
+import {UserButton} from './user-button'
 
 export default function Header() {
 	return (
 		<header className='sticky inset-x-0 top-0 z-50 bg-background'>
 			<Container className='flex h-16 items-center justify-between border-border border-b'>
 				<div className='flex flex-1 items-center justify-start'>
-					<React.Suspense fallback={null}>
+					<React.Suspense
+						fallback={
+							<Button variant={'ghost'} size={'icon'} className='rounded-full'>
+								<AlignJustifyIcon size={32} />
+							</Button>
+						}>
 						<Navbar />
 					</React.Suspense>
 				</div>

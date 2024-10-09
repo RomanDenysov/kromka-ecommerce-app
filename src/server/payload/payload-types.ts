@@ -7,351 +7,350 @@
  */
 
 export interface Config {
-	auth: {
-		users: UserAuthOperations
-	}
-	collections: {
-		users: User
-		media: Media
-		stores: Store
-		addresses: Address
-		tags: Tag
-		categories: Category
-		products: Product
-		orders: Order
-		inventory: Inventory
-		'payload-preferences': PayloadPreference
-		'payload-migrations': PayloadMigration
-	}
-	db: {
-		defaultIDType: number
-	}
-	globals: {
-		appOptions: AppOption
-	}
-	locale: null
-	user: User & {
-		collection: 'users'
-	}
+  auth: {
+    users: UserAuthOperations;
+  };
+  collections: {
+    users: User;
+    media: Media;
+    stores: Store;
+    addresses: Address;
+    tags: Tag;
+    categories: Category;
+    products: Product;
+    orders: Order;
+    inventory: Inventory;
+    'payload-preferences': PayloadPreference;
+    'payload-migrations': PayloadMigration;
+  };
+  db: {
+    defaultIDType: number;
+  };
+  globals: {
+    appOptions: AppOption;
+  };
+  locale: null;
+  user: User & {
+    collection: 'users';
+  };
 }
 export interface UserAuthOperations {
-	forgotPassword: {
-		email: string
-		password: string
-	}
-	login: {
-		email: string
-		password: string
-	}
-	registerFirstUser: {
-		email: string
-		password: string
-	}
-	unlock: {
-		email: string
-		password: string
-	}
+  forgotPassword: {
+    email: string;
+    password: string;
+  };
+  login: {
+    email: string;
+    password: string;
+  };
+  registerFirstUser: {
+    email: string;
+    password: string;
+  };
+  unlock: {
+    email: string;
+    password: string;
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
-	role: 'admin' | 'user' | 'editor' | 'b2b'
-	phone?: string | null
-	addresses?:
-		| {
-				address: number | Address
-				id?: string | null
-		  }[]
-		| null
-	preferences?: {
-		preferedStore?: (number | null) | Store
-		preferedPaymentMethod?: ('store' | 'card') | null
-	}
-	acceptedTerms: boolean
-	acceptedMailNotifications?: boolean | null
-	id: string
-	email: string
-	name?: string | null
-	image?: string | null
-	emailVerified?: string | null
-	accounts?:
-		| {
-				id?: string | null
-				provider: string
-				providerAccountId: string
-				type: string
-		  }[]
-		| null
-	sessions?:
-		| {
-				id?: string | null
-				sessionToken: string
-				expires: string
-		  }[]
-		| null
-	verificationTokens?:
-		| {
-				id?: string | null
-				token: string
-				expires: string
-		  }[]
-		| null
-	updatedAt: string
-	createdAt: string
+  role: 'admin' | 'user' | 'editor' | 'b2b';
+  phone?: string | null;
+  addresses?:
+    | {
+        address: number | Address;
+        id?: string | null;
+      }[]
+    | null;
+  preferences?: {
+    preferedStore?: (number | null) | Store;
+    preferedPaymentMethod?: ('store' | 'card') | null;
+  };
+  acceptedTerms: boolean;
+  acceptedMailNotifications?: boolean | null;
+  id: string;
+  email: string;
+  name?: string | null;
+  image?: string | null;
+  emailVerified?: string | null;
+  accounts?:
+    | {
+        id?: string | null;
+        provider: string;
+        providerAccountId: string;
+        type: string;
+      }[]
+    | null;
+  sessions?:
+    | {
+        id?: string | null;
+        sessionToken: string;
+        expires: string;
+      }[]
+    | null;
+  verificationTokens?:
+    | {
+        id?: string | null;
+        token: string;
+        expires: string;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "addresses".
  */
 export interface Address {
-	id: number
-	street: string
-	street2?: string | null
-	city: string
-	zip: string
-	country: string
-	googleMapsUrl?: string | null
+  id: number;
+  street: string;
+  street2?: string | null;
+  city: string;
+  zip: string;
+  country: string;
+  googleMapsUrl?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "stores".
  */
 export interface Store {
-	id: number
-	name: string
-	openHours?: {
-		mondayFriday?: string | null
-		saturday?: string | null
-		sunday?: string | null
-	}
-	phone: string
-	email?: string | null
-	address: number | Address
-	isActive?: boolean | null
-	slug?: string | null
-	updatedAt: string
-	createdAt: string
+  id: number;
+  name: string;
+  openHours?: {
+    mondayFriday?: string | null;
+    saturday?: string | null;
+    sunday?: string | null;
+  };
+  phone: string;
+  email?: string | null;
+  address: number | Address;
+  isActive?: boolean | null;
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
 export interface Media {
-	id: number
-	alt: string
-	updatedAt: string
-	createdAt: string
-	url?: string | null
-	thumbnailURL?: string | null
-	filename?: string | null
-	mimeType?: string | null
-	filesize?: number | null
-	width?: number | null
-	height?: number | null
-	focalX?: number | null
-	focalY?: number | null
-	sizes?: {
-		sm?: {
-			url?: string | null
-			width?: number | null
-			height?: number | null
-			mimeType?: string | null
-			filesize?: number | null
-			filename?: string | null
-		}
-		thumbnail?: {
-			url?: string | null
-			width?: number | null
-			height?: number | null
-			mimeType?: string | null
-			filesize?: number | null
-			filename?: string | null
-		}
-		md?: {
-			url?: string | null
-			width?: number | null
-			height?: number | null
-			mimeType?: string | null
-			filesize?: number | null
-			filename?: string | null
-		}
-		lg?: {
-			url?: string | null
-			width?: number | null
-			height?: number | null
-			mimeType?: string | null
-			filesize?: number | null
-			filename?: string | null
-		}
-	}
+  id: number;
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    sm?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    md?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    lg?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "tags".
  */
 export interface Tag {
-	id: number
-	name: string
-	updatedAt: string
-	createdAt: string
+  id: number;
+  name: string;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "categories".
  */
 export interface Category {
-	id: number
-	name: string
-	slug?: string | null
-	parent?: (number | null) | Category
-	sortOrder?: number | null
-	updatedAt: string
-	createdAt: string
+  id: number;
+  name: string;
+  slug?: string | null;
+  parent?: (number | null) | Category;
+  sortOrder?: number | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "products".
  */
 export interface Product {
-	id: number
-	name: string
-	description: string
-	composition?: string | null
-	price: number
-	category: number | Category
-	tags?: (number | Tag)[] | null
-	status: 'draft' | 'active' | 'sold' | 'coming' | 'archived'
-	images: {
-		image: number | Media
-		id?: string | null
-	}[]
-	customSorting?: boolean | null
-	customSortingOrder?: {
-		isFavorite?: boolean | null
-		customSortingRating?: number | null
-	}
-	priceId?: string | null
-	stripeId?: string | null
-	createdBy?: (string | null) | User
-	slug?: string | null
-	updatedAt: string
-	createdAt: string
+  id: number;
+  name: string;
+  description: string;
+  composition?: string | null;
+  price: number;
+  category: number | Category;
+  tags?: (number | Tag)[] | null;
+  status: 'draft' | 'active' | 'sold' | 'coming' | 'archived';
+  images: {
+    image: number | Media;
+    id?: string | null;
+  }[];
+  customSorting?: boolean | null;
+  customSortingOrder?: {
+    isFavorite?: boolean | null;
+    customSortingRating?: number | null;
+  };
+  priceId?: string | null;
+  stripeId?: string | null;
+  createdBy?: (string | null) | User;
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "orders".
  */
 export interface Order {
-	id: number
-	createdBy?: (string | null) | User
-	guestInfo?: {
-		name: string
-		email: string
-		phone: string
-	}
-	status: 'pending' | 'progress' | 'ready' | 'completed' | 'cancelled'
-	paymentMethod: 'inStore' | 'card' | 'b2b' | 'other'
-	paymentStatus: 'pending' | 'progress' | 'completed' | 'cancelled'
-	_isPaid: boolean
-	products?:
-		| {
-				product: number | Product
-				quantity: number
-				id?: string | null
-		  }[]
-		| null
-	subtotal?: number | null
-	discount?: number | null
-	totalPrice: number
-	pickupStore?: (number | null) | Store
-	pickupDate?: string | null
-	notes?: string | null
-	updatedAt: string
-	createdAt: string
+  id: number;
+  createdBy?: (string | null) | User;
+  guestInfo?: {
+    name: string;
+    email: string;
+    phone: string;
+  };
+  status: 'pending' | 'progress' | 'ready' | 'completed' | 'cancelled';
+  paymentMethod: 'inStore' | 'card' | 'b2b' | 'other';
+  paymentStatus: 'pending' | 'progress' | 'completed' | 'cancelled';
+  _isPaid: boolean;
+  products?:
+    | {
+        product: number | Product;
+        quantity: number;
+        id?: string | null;
+      }[]
+    | null;
+  subtotal?: number | null;
+  discount?: number | null;
+  totalPrice: number;
+  pickupStore?: (number | null) | Store;
+  pickupDate?: string | null;
+  notes?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "inventory".
  */
 export interface Inventory {
-	id: number
-	product: number | Product
-	store: number | Store
-	quantity: number
-	date: string
-	status?: ('available' | 'unavailable') | null
-	updatedAt: string
-	createdAt: string
+  id: number;
+  product: number | Product;
+  store: number | Store;
+  quantity: number;
+  date: string;
+  status?: ('available' | 'unavailable') | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-	id: number
-	user: {
-		relationTo: 'users'
-		value: string | User
-	}
-	key?: string | null
-	value?:
-		| {
-				[k: string]: unknown
-		  }
-		| unknown[]
-		| string
-		| number
-		| boolean
-		| null
-	updatedAt: string
-	createdAt: string
+  id: number;
+  user: {
+    relationTo: 'users';
+    value: string | User;
+  };
+  key?: string | null;
+  value?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-	id: number
-	name?: string | null
-	batch?: number | null
-	updatedAt: string
-	createdAt: string
+  id: number;
+  name?: string | null;
+  batch?: number | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "appOptions".
  */
 export interface AppOption {
-	id: number
-	contactInfo: {
-		mainEmail: string
-		mainPhone: string
-		address?: string | null
-	}
-	socialMedia?: {
-		platforms?:
-			| {
-					platform?:
-						| ('instagram' | 'facebook' | 'substack' | 'twitter' | 'youtube')
-						| null
-					url?: string | null
-					id?: string | null
-			  }[]
-			| null
-	}
-	updatedAt?: string | null
-	createdAt?: string | null
+  id: number;
+  contactInfo: {
+    mainEmail: string;
+    mainPhone: string;
+    address?: string | null;
+  };
+  socialMedia?: {
+    platforms?:
+      | {
+          platform?: ('instagram' | 'facebook' | 'substack' | 'twitter' | 'youtube') | null;
+          url?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "auth".
  */
 export interface Auth {
-	[k: string]: unknown
+  [k: string]: unknown;
 }
 
+
 declare module 'payload' {
-	export interface GeneratedTypes extends Config {}
+  export interface GeneratedTypes extends Config {}
 }

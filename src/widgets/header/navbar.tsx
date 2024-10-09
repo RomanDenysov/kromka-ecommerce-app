@@ -17,8 +17,9 @@ import {
 	SheetTitle,
 	SheetTrigger,
 } from '~/shared/ui/components/sheet'
+import {Icons} from '~/shared/ui/icons'
 
-export const Navbar = () => {
+export const Navbar = React.memo(() => {
 	const isMounted = useMountedState()
 	const pathname = usePathname()
 	const router = useRouter()
@@ -45,29 +46,32 @@ export const Navbar = () => {
 		return (
 			<Sheet open={isOpen} onOpenChange={setIsOpen}>
 				<SheetTrigger asChild>
-					<Button variant={'outline'} size={'icon'}>
-						<AlignJustifyIcon size={28} />
+					<Button variant={'ghost'} size={'icon'} className='rounded-full'>
+						<AlignJustifyIcon size={32} />
 					</Button>
 				</SheetTrigger>
 				<SheetContent side='left' className='px-4'>
-					<SheetHeader hidden>
-						<SheetTitle hidden>Menu</SheetTitle>
+					<SheetHeader className='grid w-full place-content-center'>
+						<SheetTitle>
+							<Icons.kromka className='h-4 w-auto fill-accent-foreground' />
+							<span className='sr-only'>Kromka Logo</span>
+						</SheetTitle>
 						<SheetDescription hidden>
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
 						</SheetDescription>
 					</SheetHeader>
 					<nav className='flex flex-col gap-y-4 py-10'>
-						{NAV_LINKS.map(({href, label}) => (
+						{NAV_LINKS.map((link) => (
 							<Button
-								onClick={() => onClick(href)}
-								key={href}
-								variant={
-									isActive(href) || (isHome && href === '/')
-										? 'outline'
-										: 'ghost'
-								}
-								className='w-full justify-start text-lg tracking-tight'>
-								{label}
+								onClick={() => onClick(link.href)}
+								key={link.href}
+								variant={'ghost'}
+								className={cn(
+									'w-full justify-start text-lg tracking-tight',
+									link.href === pathname && 'bg-accent text-accent-foreground',
+								)}>
+								<link.icon size={20} className='mr-2 text-muted-foreground' />
+								{link.label}
 							</Button>
 						))}
 					</nav>
@@ -97,4 +101,4 @@ export const Navbar = () => {
 			)}
 		</>
 	)
-}
+})

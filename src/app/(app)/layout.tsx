@@ -1,9 +1,9 @@
+import '~/shared/styles/globals.css'
 import {GeistMono} from 'geist/font/mono'
 import {GeistSans} from 'geist/font/sans'
 import type {Metadata, Viewport} from 'next'
 import {cn} from '~/shared/lib/utils'
-import {RootProvider} from '~/shared/providers/root-provider'
-import '~/shared/styles/globals.css'
+import {Providers} from '~/shared/providers/providers'
 
 export const viewport: Viewport = {
 	themeColor: [
@@ -25,11 +25,11 @@ export default function RootLayout({
 		<html lang='sk'>
 			<body
 				className={cn(
-					'relative min-h-screen bg-backgorund font-sans text-foreground antialiased',
+					'relative size-full min-h-screen bg-backgorund font-sans text-foreground antialiased',
 					GeistSans.variable,
 					GeistMono.variable,
 				)}>
-				<RootProvider>{children}</RootProvider>
+				<Providers>{children}</Providers>
 			</body>
 		</html>
 	)

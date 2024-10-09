@@ -27,7 +27,7 @@ export default function StoreCard() {
 					</div>
 					<Separator />
 				</div>
-				<div className='flex w-full items-center justify-center space-x-5 md:space-x-8'>
+				<div className='flex w-full items-center justify-evenly space-x-6 md:space-x-8'>
 					<Link href={''}>
 						<PhoneIcon size={16} />
 					</Link>

@@ -44,7 +44,7 @@ export const ProductListing = React.memo(({product, index}: Props) => {
 						href={{
 							pathname: `/products/${product.slug}`,
 							query: {
-								cat: categorySlug,
+								c: categorySlug,
 							},
 						}}>
 						<ImageSlider urls={validUrls} />

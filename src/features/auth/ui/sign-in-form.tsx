@@ -1,6 +1,7 @@
 import {zodResolver} from '@hookform/resolvers/zod'
-import {signIn} from 'next-auth/react'
+import {useRouter} from 'next/navigation'
 import {useForm} from 'react-hook-form'
+import {toast} from 'sonner'
 import {type EmailFormData, emailSchema} from '~/features/auth/validator'
 import {
 	Form,
@@ -12,8 +13,10 @@ import {
 } from '~/shared/ui/components/form'
 import {Input} from '~/shared/ui/components/input'
 import {LoaderButton} from '~/shared/ui/components/loader-button'
+import {api} from '~/trpc/react'
 
 export default function SignInForm() {
+	const router = useRouter()
 	const form = useForm<EmailFormData>({
 		resolver: zodResolver(emailSchema),
 		defaultValues: {
@@ -21,9 +24,33 @@ export default function SignInForm() {
 		},
 	})
 
-	const onSubmit = (data: EmailFormData) => {
-		signIn('nodemailer', {redirectTo: '/', email: data.email})
-		console.debug('SignInForm:onSubmit', data)
+	const loginEmail = api.users.loginEmail.useMutation({
+		onSuccess: ({success, emailLink}) => {
+			console.log(
+				'🚀 ~ file: sign-in-form.tsx:30 ~ SignInForm ~ redirect:',
+				emailLink,
+			)
+
+			if (!success) {
+				toast.success('Prihlásovaci link bol odoslaný na email', {
+					action: {
+						label: 'Prejst na email',
+						onClick: () => {
+							router.push(emailLink ?? '')
+						},
+					},
+				})
+			}
+		},
+		onError: (error) => {
+			toast.error('Prihlásenie zlyhalo')
+			console.error('SignInForm:onError', error)
+		},
+	})
+
+	const onSubmit = ({email}: EmailFormData) => {
+		loginEmail.mutate({email})
+		console.debug('SignInForm:onSubmit', email)
 	}
 
 	return (
@@ -53,7 +80,7 @@ export default function SignInForm() {
 						size={'lg'}
 						className='w-full font-medium'
 						type='submit'
-						isLoading={form.formState.isSubmitting}>
+						isLoading={loginEmail.isPending}>
 						Pokračovať z Email
 					</LoaderButton>
 				</form>
