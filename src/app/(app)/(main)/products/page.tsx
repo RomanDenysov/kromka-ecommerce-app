@@ -16,7 +16,7 @@ type Props = {
 
 const ARGS = {limit: 100, sort: 'asc'}
 
-export default function ProductsPage({params, searchParams}: Props) {
+export default async function ProductsPage({params, searchParams}: Props) {
 	const categorySlug = Array.isArray(searchParams?.c)
 		? searchParams.c[0]
 		: searchParams?.c || ''
@@ -25,7 +25,7 @@ export default function ProductsPage({params, searchParams}: Props) {
 
 	return (
 		<Container className='pt-5 pb-20'>
-			<React.Suspense>
+			<React.Suspense key={categorySlug}>
 				<HydrateClient>
 					<ProductsReel
 						// title='Všetky produkty']
